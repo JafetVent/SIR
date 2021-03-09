@@ -108,33 +108,7 @@ body {
               
 <!--------------CONTENIDO-------->
     
-                           <?php
-
-                #ISSET: isset() determina su una variable esta definida y no es NULL
-
-                        if (isset($_GET["pagina"])) {
-                            if ($_GET["pagina"]=="busqueda" || 
-                                $_GET["pagina"]=="factura" ||
-                                $_GET["pagina"]=="login" || 
-                                $_GET["pagina"]=="parte" ||
-                                $_GET["pagina"]=="salir" ) 
-                            {
-                                include "paginas/".$_GET["pagina"].".php";
-                            }else
-                            {
-                                include "paginas/error404.php";
-                            }
-
-
-                        }else
-                        {
-
-                            include "paginas/factura.php";
-
-                        }
-
-
-                        ?>  
+                           
    </div>
 
 
