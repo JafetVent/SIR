@@ -41,13 +41,28 @@ class ControladorFormularios{
 
 	/*SELECCIONAR REGISTROS*/
 
-	static public function ctrSeleccionarRegistros($item, $valor){
+	static public function ctrSeleccionarRegistrosFactura($item, $valor){
 
 		$tabla = "factura";
 		$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
+
 		return $respuesta;
 		
 	}
+
+	static public function ctrSeleccionarRegistrosParte($item, $valor){
+
+		$tabla = "parte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+		/*=============================================
+	Registro
+	=============================================*/
+
 
 	/*Eliminar registro*/
 	public function ctrEliminarRegistro(){

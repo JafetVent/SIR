@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center text-center">
+
+    <form class="p-5 bg-light" method="POST">
+
+        <!--Campo No.Parte-->
+        <div class="form-group">
+            <label for="noParte">
+              No. Parte:
+          </label>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+            </div>
+            <input type="text" class="form-control" id="noParte" name="registroParte">
+        </input>
+    </div>
+</div>
+
+<!--Campo Proveedor-->
+<div class="form-group">
+    <label for="proveedor">
+      Proveedor:
+  </label>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-warehouse"></i></span>
+    </div>
+    <input type="text" class="form-control" id="proveedor" name="registroProveedor">
+</input>
+</div>
+</div>
+
+<!--Campo SubProveedor-->
+<div class="form-group">
+    <label for="subProveedor">
+      SubProveedor:
+  </label>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-dolly-flatbed"></i></i></span>
+    </div>
+    <input type="text" class="form-control" id="subProveedor" name="registroSubProveedor">
+</input>
+</div>
+</div>
+
+<!--Campo Familia-->
+<div class="form-group">
+    <label for="familia">
+      Familia:
+  </label>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-car"></i></i></span>
+    </div>
+    <input type="text" class="form-control" id="familia" name="registroFamilia">
+</input>
+</div>
+</div>
+
+<!--Campo Descripción-->
+<div class="form-group">
+    <label for="descripcion">
+        Descripción:
+    </label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-info"></i></i></span>
+        </div>
+        <textarea name="descripcion" rows="5" cols="60"></textarea>
+   </div>
+</div>
+
+<!--Campo imagen-->
+<div class="form-group">
+    <div class="input-group">
+       <label for="myfile">Seleccione una imagen:</label>
+  <input type="file" id="myfile" name="myfile"><br><br>
+
+</div>
+</div>
+
+<button class="btn btn-primary" type="submit">
+    Guardar
+</button>
+
+</form>
+</div>

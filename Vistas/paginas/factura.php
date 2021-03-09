@@ -17,24 +17,27 @@ if(!isset($_SESSION["validarIngreso"])){
     
 }
 
-$Factura = ControladorFormularios::ctrSeleccionarRegistros(null, null, null);
+$Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, null);
 
 
 ?>
 
-<a href="index.php?pagina=salir">logut</a>
+<div class="">
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
-<div class="container">
-<?php if (isset($_GET["pagina"])): ?>
-                            <?php if ($_GET["pagina"]=="salir"): ?>
-                             <li class="nav-item">
-                                <a class="nav-link active" href="index.php?pagina=salir">
-                                    Salir
-                                </a>
-                            </li> 
-                            <?php endif ?>
-                            <?php endif ?>
-                        </div>
+    <form class="form-inline" action="/action_page.php">
+
+    <input class="form-control mr-sm-2" type="text" placeholder="Factura">
+    <button class="btn btn-success" type="submit">Buscar</button>    
+  </form>
+<div class="col-sm-8">
+  <form class="form-inline">
+    <a  class="btn btn-success" href="index.php?pagina=agregarFactura"  class="btn btn-warning">Agregar Factura</a>
+  </form>
+</div>
+</nav>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -70,7 +73,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistros(null, null, null);
 
                     <div class="btn-group">
                         <div class="px-1">
-                        <a href="index.php?pagina=editar&id=<?php echo $value["id"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href="index.php?pagina=editar&id=<?php echo $value["id"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
 
                         <form method="POST">
@@ -79,9 +82,9 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistros(null, null, null);
                             <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             <?php
 
-                                $eliminar = new ControladorFormularios();
+                            $eliminar = new ControladorFormularios();
 
-                                $eliminar -> ctrEliminarRegistro();
+                            $eliminar -> ctrEliminarRegistro();
 
                             ?>
                         </form>

@@ -3,6 +3,10 @@
 require_once "conexion.php";
 
 class ModeloFormularios{
+	
+
+
+	
 	static public function mdlSeleccionarRegistros($tabla, $item, $valor){
 
 		if ($item == null && $valor == null) {
