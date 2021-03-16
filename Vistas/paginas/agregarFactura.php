@@ -1,3 +1,5 @@
+
+
 <div class="d-flex justify-content-center text-center">
 
     <form class="p-5 bg-light" method="POST">
@@ -43,6 +45,8 @@
 </div>
 </div>
 
+
+
 <?php
     # La lista de nombres; por defecto vacía
     $nombres = [];
@@ -64,6 +68,7 @@
     ?>
     <form method="post" action="index.php">
         <!--Comienza el ciclo que dibuja los campos dinámicos-->
+
         <?php foreach ($nombres as $nombre) { ?>
             <input value="<?php echo $nombre ?>" type="text" name="nombres[]">
             <br><br>

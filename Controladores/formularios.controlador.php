@@ -59,6 +59,15 @@ class ControladorFormularios{
 		
 	}
 
+	static public function ctrSeleccionarRegistrosReporte($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
 		/*=============================================
 	Registro
 	=============================================*/

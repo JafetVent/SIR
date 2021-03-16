@@ -137,7 +137,9 @@ session_start();
               $_GET["pagina"]=="parte" ||
               $_GET["pagina"]=="salir"||
               $_GET["pagina"]=="agregarParte" ||
-              $_GET["pagina"]=="agregarFactura") 
+              $_GET["pagina"]=="agregarFactura"||
+              $_GET["pagina"]=="editar"
+            ) 
           {
             include "paginas/".$_GET["pagina"].".php";
           }else{

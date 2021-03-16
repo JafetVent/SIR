@@ -29,6 +29,6 @@ class ModeloFormularios{
 		$stmt = null;
 				
 	}
-	}
+}
 
 ?>

@@ -21,24 +21,36 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
 
 
 ?>
-
-<div class="">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<div class="row">
     
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
+    
+<div class="col" >
     <form class="form-inline" action="/action_page.php">
 
     <input class="form-control mr-sm-2" type="text" placeholder="Factura">
-    <button class="btn btn-success" type="submit">Buscar</button>    
+    <a  class="btn btn-success" href="index.php?pagina=busqueda&idInvoice=<?php echo $value["idInvoice"]; ?>"  class="btn">Buscar</a>
   </form>
-<div class="col-sm-8">
-  <form class="form-inline">
-    <a  class="btn btn-success" href="index.php?pagina=agregarFactura"  class="btn btn-warning">Agregar Factura</a>
-  </form>
-</div>
-</nav>
 </div>
 
+<div class="col">
+    
+<form class="form-inline" action="/action_page.php">
+
+    <input class="form-control mr-sm-2" type="text" placeholder="Fecha">
+    <a  class="btn btn-success" href="index.php?pagina=busqueda&idInvoice=<?php echo $value["idInvoice"]; ?>"  class="btn">Buscar</a>
+  </form>
+
+</div>
+
+<div >
+  <form class="form-inline">
+    <a  class="btn btn-success" href="index.php?pagina=agregarFactura"  class="btn">Agregar Factura</a>
+  </form>
+</div>
+
+</div>
+</nav>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -73,7 +85,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
 
                     <div class="btn-group">
                         <div class="px-1">
-                            <a href="index.php?pagina=editar&id=<?php echo $value["id"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href="index.php?pagina=editar&id=<?php echo $value["idInvoice"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
 
                         <form method="POST">
