@@ -21,6 +21,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
 
 
 ?>
+<div class="container py-5">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 <div class="row">
     
@@ -51,6 +52,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
 
 </div>
 </nav>
+
 <table class="table table-striped">
     <thead>
         <tr>

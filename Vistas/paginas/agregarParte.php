@@ -1,3 +1,4 @@
+<div class="container py-5">
 <div class="d-flex justify-content-center text-center">
 
     <form class="p-5 bg-light" method="POST">
@@ -89,4 +90,5 @@
 </button>
 
 </form>
+</div>
 </div>

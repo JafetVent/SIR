@@ -22,7 +22,7 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, nu
 
 ?>
 
-<div class="">
+<div class="container py-5">
     
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
@@ -43,9 +43,6 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, nu
 
 </nav>
 
-
-
-</div>
 
 <table class="table table-striped">
     <thead>
@@ -99,4 +96,5 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, nu
         <?php endforeach?>       
     </tbody>
 </table>
+</div>
 </div>

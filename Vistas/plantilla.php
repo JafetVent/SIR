@@ -27,109 +27,129 @@ session_start();
 </link>
 </meta>
 </meta>
-
-<!--------------LOGOTIPO----------->
-
-<div class="img-container"> 
-  <img src="Imagenes/pass-logo.png" alt="PASS logo" class="center">
-</div>
-
 </head>
 
-<style>
-  body {
-    font-family: "Lato", sans-serif;
-  }
-
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #0275d8;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #292b2c;
-    display: block;
-    transition: 0.3s;
-  }
-
-  .sidenav a:hover {
-    color: ##292b2c;
-  }
-
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-
-
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 35px;}
-    .sidenav a {font-size: 18px;}
-  }
-
+  <style>
+  /* Make the image fully responsive */
   #hide-me {
-    width: 100px;
-    height: 100px;
-    background: #bf7130;
-    display: block;
-    padding: 10px;
-    margin: 0 15px 0 0;
-    font-size: 14px;
-    font-weight: bold;
-    float: left;
-    text-align: center;
-    background: rgba(0, 0, 0, .15);
-  }
+     display: none;
+}
 </style>
+<!--------------LOGOTIPO----------->
+
 <body>
+  <dir>
+<nav class="navbar navbar-expand-sm justify-content-center">
+    <img src="Imagenes/pass-logo.png" alt="Logo">
+</nav>
+</dir>
+
+<div  class="container-fluid bg-light">
+        <div class="container">
+            <ul class="nav nav-justified py-2 nav-pills">
+                     <!--GET: $_GET["variable"] Variables que se pasan como parametros via URL (Tambien conocido como cadena de consulta a través de la URL)
+                        Cuando es la primera variables se separa con ?, las que siguen se separan con &-->
+
+                        <!--REGISTRO-->
+                        <?php if (isset($_GET["pagina"])): ?>
+                            <?php if ($_GET["pagina"]=="factura"): ?>
+                             <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=factura">
+                                    Factura
+                                </a>
+                            </li> 
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=factura">
+                                        Factura
+                                    </a>
+                                </li>
+                            <?php endif ?>
+                        <?php endif ?>
+
+                        <!--INGRESO-->
+                        <?php if (isset($_GET["pagina"])): ?>
+                            <?php if ($_GET["pagina"]=="parte"): ?>
+                             <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=parte">
+                                    Parte
+                                </a>
+                            </li> 
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=parte">
+                                        Parte
+                                    </a>
+                                </li>
+                            <?php endif ?>
+                        <?php endif ?>
+
+                        <!--INICIO-->
+                        <?php if (isset($_GET["pagina"])): ?>
+                            <?php if ($_GET["pagina"]=="reporte"): ?>
+                             <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=reporte">
+                                    Reportes
+                                </a>
+                            </li> 
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=reporte">
+                                        Reportes
+                                    </a>
+                                </li>
+                            <?php endif ?>
+                        <?php endif ?>
+
+                        <!--SALIR-->
+                        <?php if (isset($_GET["pagina"])): ?>
+                            <?php if ($_GET["pagina"]=="salir"): ?>
+                             <li class="nav-item">
+                                <a class="nav-link active" href="index.php?pagina=salir">
+                                    Salir
+                                </a>
+                            </li> 
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=salir">
+                                        Salir
+                                    </a>
+                                </li>
+                            <?php endif ?>
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="index.php?pagina=factura">
+                                        Factura
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=parte">
+                                        Parte
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=reporte">
+                                        Reportes
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="index.php?pagina=salir">
+                                        Salir
+                                    </a>
+                                </li>
 
 
-
-
-  <!--------------MENU DESPEGABLE-------->
-  <div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-    <a href="index.php?pagina=perfil"><i class="fas fa-user"></i>  Perfil</a>
-    <a href="index.php?pagina=factura">Facturas</a>
-    <a href="index.php?pagina=parte">Partes</a>
-    <a href="index.php?pagina=salir">Cerrar Sesión</a>
-
-  </div>
-
-  <div id="main" class="container-fluid">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-
-    <div class="container-fluid">
-      <div class="container py-5">
+                            <?php endif ?>
+                        </ul>
+                    </div>
+                </div>
         <!--------------CONTENIDO-------->
 
-
+        <div class="container-fluid">
+            <div class="">
         <?php
 
-
-
-                #ISSET: isset() determina su una variable esta definida y no es NULL
+              #ISSET: isset() determina su una variable esta definida y no es NULL
 
         if (isset($_GET["pagina"])) {
           if ($_GET["pagina"]=="login" || 
@@ -138,7 +158,8 @@ session_start();
               $_GET["pagina"]=="salir"||
               $_GET["pagina"]=="agregarParte" ||
               $_GET["pagina"]=="agregarFactura"||
-              $_GET["pagina"]=="editar"
+              $_GET["pagina"]=="editar" ||
+              $_GET["pagina"]=="valoresParte"
             ) 
           {
             include "paginas/".$_GET["pagina"].".php";
@@ -153,22 +174,8 @@ session_start();
 
         }
 
-
-        ?>                             
-      </div>
-    </div>
-
-
-    <script>
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-      }
-
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft= "0";
-      }
-    </script>
+        ?>
+                </div>
+                </div>              
   </body>
   </html>

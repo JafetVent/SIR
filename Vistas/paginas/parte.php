@@ -21,8 +21,8 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 
 
 ?>
-<div class="">
-    
+<div class="container py-5">
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
     <form class="form-inline" action="/action_page.php">
@@ -39,7 +39,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 
 
 
-</div>
+
 
 <table class="table table-striped">
     <thead>
@@ -94,7 +94,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 
                     <div class="btn-group">
                         <div class="px-1">
-                            <a href="index.php?pagina=editar&id=<?php echo $value["id"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href="index.php?pagina=valoresParte&id=<?php echo $value["noParte"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
 
                         <form method="POST">
