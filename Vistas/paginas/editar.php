@@ -1,24 +1,13 @@
 <?php
 
-if(!isset($_SESSION["validarIngreso"])){
-
-    echo '<script>window.location = "index.php?pagina=login";</script>';
-
-    return;
-
-}else{
-
-    if($_SESSION["validarIngreso"] != "ok"){
-
-        echo '<script>window.location = "index.php?pagina=login";</script>';
-
-        return;
-    }
+if (isset($_GET["idFactura"])) {
+    $item = "idFactura";
+    $valor = $_GET["idFactura"];
+$Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
     
-}
+    }
 
-$Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, null);
-
+$Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null,null,null);
 
 ?>
 
@@ -42,8 +31,7 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, nu
 
 
 </nav>
-
-
+Welcome <?php echo $Reporte["idFactura"]; ?><br>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -60,7 +48,7 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, nu
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($Reporte as $key => $value): ?>
+        <?php foreach ($Reporte as $key => $value): ?> 
             <tr>
                 <td>
                     <?php echo $value["noParte"];?>
@@ -93,7 +81,7 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, nu
                     </div>
                 </td>
             </tr>
-        <?php endforeach?>       
+        <?php endforeach?>        
     </tbody>
 </table>
 </div>

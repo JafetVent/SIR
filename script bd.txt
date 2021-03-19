@@ -1,0 +1,63 @@
+CREATE TABLE usuario(
+    noTrabajador INT NOT NULL,
+    nombre VARCHAR(20),
+    apellido VARCHAR(20),
+    rol VARCHAR(10) NOT NULL,
+    password VARCHAR(25) NOT NULL,
+    ruta_firma VARCHAR(100) NOT NULL,
+    PRIMARY KEY(noTrabajador)
+); 
+
+CREATE TABLE parte(
+    noParte VARCHAR(20) NOT NULL,
+    proveedor VARCHAR(25) NOT NULL,
+    subproveedor VARCHAR(25),
+    familia VARCHAR(25) NOT NULL,
+    descripcion VARCHAR(80) NOT NULL,
+    ruta_imagen VARCHAR(100) NOT NULL,
+    PRIMARY KEY(noParte)
+); 
+
+CREATE TABLE factura(
+    idFactura INT NOT NULL AUTO_INCREMENT,
+    idInvoice INT NOT NULL,
+    noParte VARCHAR(20) NOT NULL,
+    fecha DATE,
+    PRIMARY KEY(idFactura),
+    FOREIGN KEY(noParte) REFERENCES parte(noParte)
+); 
+
+CREATE TABLE valoresInsp(
+    idValor INT NOT NULL AUTO_INCREMENT,
+    noParte VARCHAR(20) NOT NULL,
+    caracteristicas VARCHAR(80) NOT NULL,
+    especificacion VARCHAR(80) NOT NULL,
+    equipo VARCHAR(80) NOT NULL,
+    toleranciamin VARCHAR(5) NOT NULL,
+    toleranciamax VARCHAR(5) NOT NULL,
+    PRIMARY KEY(idValor),
+    FOREIGN KEY(noParte) REFERENCES parte(noParte)
+); 
+
+CREATE TABLE reporte(
+    idReporte INT NOT NULL AUTO_INCREMENT,
+    noParte VARCHAR(20) NOT NULL,
+    idFactura INT NOT NULL,
+    noTrabajador INT NOT NULL,
+    fecha DATE NOT NULL,
+    fechafifo DATE NOT NULL,
+    noPiezas INT NOT NULL,
+    noCaja VARCHAR(25) NOT NULL,
+    turno VARCHAR(1) NOT NULL,
+    inspeccion1 VARCHAR(5) NOT NULL,
+    inspeccion2 VARCHAR(5) NOT NULL,
+    inspeccion3 VARCHAR(5) NOT NULL,
+    inspeccion4 VARCHAR(5) NOT NULL,
+    inspeccion5 VARCHAR(5) NOT NULL,
+    estatus VARCHAR(2) NOT NULL,
+    observacion VARCHAR(60),
+    PRIMARY KEY(idReporte),
+    FOREIGN KEY(noParte) REFERENCES parte(noParte),
+    FOREIGN KEY(idFactura) REFERENCES factura(idFactura),
+    FOREIGN KEY(noTrabajador) REFERENCES usuario(noTrabajador)
+);

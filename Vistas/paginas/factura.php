@@ -84,11 +84,14 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
                 </td>
 
                 <td>                           
-
+                    <form method="GET">
                     <div class="btn-group">
                         <div class="px-1">
-                            <a href="index.php?pagina=editar&id=<?php echo $value["idInvoice"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href="index.php?pagina=editar&id=<?php echo $value["idFactura"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
+                        </form>
+                    
+
 
                         <form method="POST">
                             <input type="hidden" value="<?php echo $value["id"]; ?>" name="eliminarRegistro">
