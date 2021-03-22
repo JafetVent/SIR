@@ -86,15 +86,15 @@ session_start();
 
                         <!--INICIO-->
                         <?php if (isset($_GET["pagina"])): ?>
-                            <?php if ($_GET["pagina"]=="reporte"): ?>
+                            <?php if ($_GET["pagina"]=="reportes"): ?>
                              <li class="nav-item">
-                                <a class="nav-link active" href="index.php?pagina=reporte">
+                                <a class="nav-link active" href="index.php?pagina=reportes">
                                     Reportes
                                 </a>
                             </li> 
                             <?php else: ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.php?pagina=reporte">
+                                    <a class="nav-link" href="index.php?pagina=reportes">
                                         Reportes
                                     </a>
                                 </li>
@@ -128,7 +128,7 @@ session_start();
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.php?pagina=reporte">
+                                    <a class="nav-link" href="index.php?pagina=reportes">
                                         Reportes
                                     </a>
                                 </li>
@@ -159,7 +159,8 @@ session_start();
               $_GET["pagina"]=="agregarParte" ||
               $_GET["pagina"]=="agregarFactura"||
               $_GET["pagina"]=="editar" ||
-              $_GET["pagina"]=="valoresParte"
+              $_GET["pagina"]=="valoresParte"||
+              $_GET["pagina"]=="reportes"
             ) 
           {
             include "paginas/".$_GET["pagina"].".php";

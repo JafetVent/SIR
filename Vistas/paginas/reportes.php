@@ -1,15 +1,18 @@
 <?php
 
-if (isset($_GET["id"])) {
-    $item = "id";
-    $valor = $_GET["id"];
-    $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
+if (isset($_GET["idInvoice"])) {
+    $item = "idInvoice";
+    $valor = $_GET["idInvoice"];
+$Reporte1 = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
+    
+    }
 
-}
+$Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null,null,null);
 
-var_dump($reporte);
+var_dump($Reporte1);
+
+
 ?>
-
 
 <div class="container py-5">
     
@@ -36,6 +39,12 @@ var_dump($reporte);
     <thead>
         <tr>
             <th>
+                #
+            </th>
+            <th>
+                Factura
+            </th>
+            <th>
                 No. Parte
             </th>
             <th>
@@ -48,15 +57,20 @@ var_dump($reporte);
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($reporte as $key => $value): ?> 
+        <?php foreach ($Reporte as $key => $value): ?> 
             <tr>
+                <td>
+                    <?php echo ($key+1); ?>
+                </td>
                 <td>
                     <?php echo $value["idFactura"];?>
                 </td>
                 <td>
+                    <?php echo $value["noParte"];?>
+                </td>
+                <td>
                     <?php echo $value["estatus"];?>
                 </td>
-
 
                 <td>                           
 

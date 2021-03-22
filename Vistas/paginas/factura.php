@@ -17,7 +17,9 @@ if(!isset($_SESSION["validarIngreso"])){
     
 }
 
-$Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, null);
+$Factura = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, null);
+
+var_dump($Factura);
 
 
 ?>
@@ -30,7 +32,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
     <form class="form-inline" action="/action_page.php">
 
     <input class="form-control mr-sm-2" type="text" placeholder="Factura">
-    <a  class="btn btn-success" href="index.php?pagina=busqueda&idInvoice=<?php echo $value["idInvoice"]; ?>"  class="btn">Buscar</a>
+    <a  class="btn btn-success" href="index.php?pagina=busqueda&idInvoice=<?php echo $value["idInvoice"]; ?>"  name="idFactura" class="btn">Buscar</a>
   </form>
 </div>
 
@@ -77,19 +79,19 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
                     <?php echo ($key+1); ?>
                 </td>
                 <td>
-                    <?php echo $value["idInvoice"];?>
+                    <?php echo $value["idFactura"];?>
                 </td>
                 <td>
                     <?php echo $value["fecha"];?>
                 </td>
 
                 <td>                           
-                    <form method="GET">
+                    
                     <div class="btn-group">
                         <div class="px-1">
                             <a href="index.php?pagina=editar&id=<?php echo $value["idFactura"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
-                        </form>
+                        
                     
 
 

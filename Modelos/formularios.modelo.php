@@ -21,7 +21,7 @@ class ModeloFormularios{
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 
-			return $stmt -> fetch();
+			return $stmt -> fetchALL();
 		}
 
 		$stmt -> close();
