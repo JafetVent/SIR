@@ -17,9 +17,8 @@ if(!isset($_SESSION["validarIngreso"])){
     
 }
 
-$Factura = ControladorFormularios::ctrSeleccionarRegistrosReporte(null, null, null);
+$Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, null);
 
-var_dump($Factura);
 
 
 ?>

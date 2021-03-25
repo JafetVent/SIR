@@ -1,13 +1,12 @@
 <?php
 
 if (isset($_GET["id"])) {
-    $item = "id";
+    $item = "idFactura";
     $valor = $_GET["id"];
-    $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
+    $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor);
 
 }
 
-var_dump($reporte);
 ?>
 
 
@@ -51,7 +50,7 @@ var_dump($reporte);
         <?php foreach ($reporte as $key => $value): ?> 
             <tr>
                 <td>
-                    <?php echo $value["idFactura"];?>
+                    <?php echo $value["noParte"];?>
                 </td>
                 <td>
                     <?php echo $value["estatus"];?>

@@ -1,17 +1,23 @@
 <?php
 
-if (isset($_GET["idInvoice"])) {
-    $item = "idInvoice";
-    $valor = $_GET["idInvoice"];
-$Reporte1 = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
-    
+if(!isset($_SESSION["validarIngreso"])){
+
+    echo '<script>window.location = "index.php?pagina=login";</script>';
+
+    return;
+
+}else{
+
+    if($_SESSION["validarIngreso"] != "ok"){
+
+        echo '<script>window.location = "index.php?pagina=login";</script>';
+
+        return;
     }
+    
+}
 
 $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null,null,null);
-
-var_dump($Reporte1);
-
-
 ?>
 
 <div class="container py-5">
@@ -42,10 +48,10 @@ var_dump($Reporte1);
                 #
             </th>
             <th>
-                Factura
+                Reporte
             </th>
             <th>
-                No. Parte
+                Factura
             </th>
             <th>
                 Estatus
@@ -63,10 +69,10 @@ var_dump($Reporte1);
                     <?php echo ($key+1); ?>
                 </td>
                 <td>
-                    <?php echo $value["idFactura"];?>
+                    <?php echo $value["idReporte"];?>
                 </td>
                 <td>
-                    <?php echo $value["noParte"];?>
+                    <?php echo $value["idFactura"];?>
                 </td>
                 <td>
                     <?php echo $value["estatus"];?>

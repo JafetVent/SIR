@@ -1,7 +1,7 @@
 <div class="container py-5">
 <div class="d-flex justify-content-center text-center">
 
-    <form class="p-5 bg-light" method="POST">
+    <form class="p-5 bg-light" method="POST" enctype="multipart/form-data">
 
         <!--Campo No.Parte-->
         <div class="form-group">
@@ -77,18 +77,42 @@
 </div>
 
 <!--Campo imagen-->
-<div class="form-group">
-    <div class="input-group">
-       <label for="myfile">Seleccione una imagen:</label>
-  <input type="file" id="myfile" name="myfile"><br><br>
-
-</div>
-</div>
-
-<button class="btn btn-primary" type="submit">
-    Guardar
-</button>
-
+<div id="content">
+            <input type="file" 
+                   name="imagen" 
+                   value="" />
+  
+            <div>
+                <button type="submit"
+                        name="upload">
+                  Subir
+                </button>
+            </div>
+    </div>
 </form>
 </div>
 </div>
+
+ <?php
+    /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO NO ESTATICO*/
+       // $registro = new controladorFormularios();
+       // $registro -> ctrRegistro();
+
+    /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO ESTATICO*/
+        $registro = controladorFormularios::ctrRegistro();
+        //echo $registro;
+
+        if ($registro == "ok") {
+
+            echo '<script>
+
+                if(window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                }
+
+            </script>';
+
+            echo '<div class="alert alert-success">El usuario ha sido registrado</div>';
+        }
+
+    ?>

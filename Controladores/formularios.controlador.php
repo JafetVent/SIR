@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 class ControladorFormularios{
 
 	/*Inicio de sesion*/
@@ -68,13 +67,44 @@ class ControladorFormularios{
 		
 	}
 
+	static public function ctrSeleccionarRegistrosReporteV($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosV($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
 
 		/*=============================================
 	Registro
 	=============================================*/
+	static public function ctrRegistro(){
 
+				$foto = $_FILES["imagen"]["name"];
+				$fototemp = $_FILES["imagen"]["tmp_name"];
+				$url = "Imagenes/Partes".$foto;
+				copy($fototemp, $fotourl);
 
-	/*Eliminar registro*/
+			
+			$tabla = "parte";
+			$datos = array("noParte" => $_POST["registroParte"],
+				"proveedor" => $_POST["registroProveedor"],
+				"subproveedor" => $_POST["registroSubProveedor"],
+				"familia" => $_POST["registroFamilia"],
+				"descripcion" => $_POST["registroDescripcion"],
+				"foto" => $foto,
+				"url" => $url
+				 );
+
+			$respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
+
+			return $respuesta;
+	
+}
+
+/*Eliminar registro*/
 	public function ctrEliminarRegistro(){
 		if (isset($_POST["eliminarRegistro"])) {
 
@@ -100,7 +130,11 @@ class ControladorFormularios{
 	}
 
 
-
-
 }
+
+
+
 ?>
+
+
+
