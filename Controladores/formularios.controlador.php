@@ -81,26 +81,31 @@ class ControladorFormularios{
 	Registro
 	=============================================*/
 	static public function ctrRegistro(){
+		if(isset($_POST["registroParte"]) ){
+			// $foto = $_FILES[$_POST["imagen"]]["name"];
+			// $fototemp = $_FILES[$_POST["imagen"]]["tmp_name"];
+			// $url = "Imagenes/Partes/".$foto;
+			// copy($fototemp, $url);
+			$dir_subida = 'Imagenes/Partes/';
+			$fichero_subido = $dir_subida . basename($_FILES['imagen']['name']);
 
-				$foto = $_FILES["imagen"]["name"];
-				$fototemp = $_FILES["imagen"]["tmp_name"];
-				$url = "Imagenes/Partes".$foto;
-				copy($fototemp, $fotourl);
-
-			
-			$tabla = "parte";
-			$datos = array("noParte" => $_POST["registroParte"],
+			if (move_uploaded_file($_FILES['imagen']['tmp_name'], $fichero_subido)) {
+				$tabla = "parte";
+				$datos = array(
+				"noParte" => $_POST["registroParte"],
 				"proveedor" => $_POST["registroProveedor"],
 				"subproveedor" => $_POST["registroSubProveedor"],
 				"familia" => $_POST["registroFamilia"],
 				"descripcion" => $_POST["registroDescripcion"],
-				"foto" => $foto,
-				"url" => $url
+				"ruta_imagen" => $fichero_subido
 				 );
 
 			$respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
 
-			return $respuesta;
+} 
+		return $respuesta;
+		
+		}
 	
 }
 

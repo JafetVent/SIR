@@ -87,7 +87,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                     <?php echo $value["descripcion"];?>
                 </td>
                 <td>
-                    <?php echo $value["ruta_imagen"];?>
+                    <?php echo "<img src='".$value["ruta_imagen"]."' height ='100' width ='100' >";?>
                 </td>
 
                 <td>                           
@@ -98,7 +98,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                         </div>
 
                         <form method="POST">
-                            <input type="hidden" value="<?php echo $value["id"]; ?>" name="eliminarRegistro">
+                            <input type="hidden" value="<?php echo $value["noParte"]; ?>" name="eliminarRegistro">
 
                             <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             <?php

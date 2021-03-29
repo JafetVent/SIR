@@ -82,11 +82,11 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte(null,null,null
 
                     <div class="btn-group">
                         <div class="px-1">
-                            <a href="index.php?pagina=editar&id=<?php echo $value["id"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href=""  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
 
                         <form method="POST">
-                            <input type="hidden" value="<?php echo $value["id"]; ?>" name="">
+                            <input type="hidden" value="" name="">
 
                             <button type="submit"class="btn btn-info"><i class="fas fa-search"></i></button>
                             <?php
