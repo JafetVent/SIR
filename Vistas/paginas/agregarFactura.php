@@ -39,7 +39,7 @@
 <!--Campo imagen-->
 <div class="form-group">
     <div class="input-group">
-       <label for="myfile">Seleccione una imagen:</label>
+       <label for="myfile">Seleccione una archivo:</label>
   <input type="file" id="myfile" name="myfile"><br><br>
 
 </div>
