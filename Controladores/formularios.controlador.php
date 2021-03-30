@@ -76,16 +76,30 @@ class ControladorFormularios{
 		
 	}
 
+	static public function ctrSeleccionarRegistrosReporteR($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosR($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+	static public function ctrSeleccionarRegistrosFacturaR($item, $valor){
+
+		$tabla = "factura";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosF($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
 
 		/*=============================================
 	Registro
 	=============================================*/
 	static public function ctrRegistro(){
 		if(isset($_POST["registroParte"]) ){
-			// $foto = $_FILES[$_POST["imagen"]]["name"];
-			// $fototemp = $_FILES[$_POST["imagen"]]["tmp_name"];
-			// $url = "Imagenes/Partes/".$foto;
-			// copy($fototemp, $url);
 			$dir_subida = 'Imagenes/Partes/';
 			$fichero_subido = $dir_subida . basename($_FILES['imagen']['name']);
 

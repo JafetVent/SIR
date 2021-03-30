@@ -1,12 +1,12 @@
 <?php
 
-if(isset($_GET["idInvoice"])){
+if (isset($_GET["id"])) {
+    $item = "idFactura";
+    $valor = $_GET["id"];
+    $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteFactura($item, $valor);
 
-	$item = "idInvoice";
-	$valor = $_GET["idInvoice"];
 
-	$Factura = ControladorFormularios::ctrSeleccionarRegistros($item, $valor);
-
+    echo $_GET["id"];
 }
 
 ?>

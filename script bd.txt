@@ -8,6 +8,9 @@ CREATE TABLE usuario(
     PRIMARY KEY(noTrabajador)
 ); 
 
+INSERT INTO `usuario` (`noTrabajador`, `nombre`, `apellido`, `rol`, `ruta_firma`, `password`) VALUES
+(1, 'Jafet', 'Ventura', 'admin', '', '1234');
+
 CREATE TABLE parte(
     noParte VARCHAR(20) NOT NULL,
     proveedor VARCHAR(25) NOT NULL,
@@ -16,16 +19,45 @@ CREATE TABLE parte(
     descripcion VARCHAR(80) NOT NULL,
     ruta_imagen VARCHAR(100) NOT NULL,
     PRIMARY KEY(noParte)
-); 
+);
+
+INSERT INTO `parte` (`noParte`, `proveedor`, `subproveedor`, `familia`, `descripcion`, `ruta_imagen`) VALUES
+('1', 'Pass Germany', 'NA', 'VW', 'tubo negro chido', ''),
+('2', 'Pass Germany', 'NA', 'Ford', 'tubo blanco no chido', '');
+
 
 CREATE TABLE factura(
     idFactura INT NOT NULL AUTO_INCREMENT,
     idInvoice INT NOT NULL,
-    noParte VARCHAR(20) NOT NULL,
     fecha DATE,
-    PRIMARY KEY(idFactura),
-    FOREIGN KEY(noParte) REFERENCES parte(noParte)
+    PRIMARY KEY(idFactura)
 ); 
+
+INSERT INTO `factura` (`idFactura`, `idInvoice`, `noParte`, `fecha`) VALUES
+(1, 123456, '1', '0000-00-00'),
+(2, 123456, '1', '0000-00-00'),
+(3, 123456, '2', '0000-00-00'),
+(4, 654321, '1', '0000-00-00'),
+(5, 654321, '2', '0000-00-00');
+
+
+CREATE TABLE facturas_Parte(
+    idFacPar INT NOT NULL AUTO_INCREMENT,
+    idFactura INT NOT NULL,
+    noParte VARCHAR(20) NOT NULL,
+    PRIMARY KEY(idFacPar)
+);
+INSERT INTO `facturas_Parte` (`idFacPar`, `idFactura`, `noParte`) VALUES
+(1,1),
+(1,1),
+(2,1),
+(2,2),
+(3,2);
+(3,2);
+(4,1);
+(4,1);
+(5,2);
+(5,2);
 
 CREATE TABLE valoresInsp(
     idValor INT NOT NULL AUTO_INCREMENT,
@@ -37,12 +69,16 @@ CREATE TABLE valoresInsp(
     toleranciamax VARCHAR(5) NOT NULL,
     PRIMARY KEY(idValor),
     FOREIGN KEY(noParte) REFERENCES parte(noParte)
-); 
+);
+INSERT INTO `valoresinsp` (`idValor`, `noParte`, `caracteristicas`, `especificacion`, `equipo`, `toleranciamin`, `toleranciamax`) VALUES
+(1, '1', 'carac1', 'espec1', 'equipo1', 'min', 'max'),
+(2, '1', 'carac2', 'espec2', 'equipo2', 'min', 'max'),
+(3, '2', 'carac3', 'espec3', 'equipo3', 'min', 'max'),
+(4, '2', 'carac4', 'espec4', 'equipo4', 'min', 'max');
 
 CREATE TABLE reporte(
     idReporte INT NOT NULL AUTO_INCREMENT,
-    noParte VARCHAR(20) NOT NULL,
-    idFactura INT NOT NULL,
+    idFacPar INT NOT NULL,
     noTrabajador INT NOT NULL,
     fecha DATE NOT NULL,
     fechafifo DATE NOT NULL,
@@ -61,3 +97,20 @@ CREATE TABLE reporte(
     FOREIGN KEY(idFactura) REFERENCES factura(idFactura),
     FOREIGN KEY(noTrabajador) REFERENCES usuario(noTrabajador)
 );
+
+INSERT INTO `reporte` (`idFacPar`, `noTrabajador`, `fecha`, `fechafifo`, `noPiezas`, `noCaja`, `turno`, `inspeccion1`, `inspeccion2`, `inspeccion3`, `inspeccion4`, `inspeccion5`, `estatus`, `observacion`) VALUES
+('1', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('2', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('3', 1, '0000-00-00', '0000-00-00', 13, '2b', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'NA', 'MAL'),
+('4', 1, '0000-00-00', '0000-00-00', 14, '3c', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AO', 'REGULAR'),
+('5', 1, '0000-00-00', '0000-00-00', 15, '4d', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN');
+
+
+
+
+
+
+
+
+
+

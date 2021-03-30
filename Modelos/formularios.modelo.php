@@ -71,7 +71,7 @@ class ModeloFormularios{
 				
 	}
 
-	static public function mdlSeleccionarRegistrosV($tabla, $item, $valor){
+	static public function mdlSeleccionarRegistrosV($tabla, $item, $valor){		
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla  WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
@@ -82,6 +82,20 @@ class ModeloFormularios{
 			}
 			return $data;
 
+	}
+
+	static public function mdlSeleccionarRegistrosR($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN factura on reporte.idFactura = factura.idFactura");
+			$stmt -> execute();
+
+			return $stmt -> fetchALL();
+	}
+
+	static public function mdlSeleccionarRegistrosF($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN reporte on factura.idFactura = reporte.idFactura");
+			$stmt -> execute();
+
+			return $stmt -> fetchALL();
 	}
 }
 

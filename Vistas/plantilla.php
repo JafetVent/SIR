@@ -72,13 +72,13 @@ session_start();
                             <?php if ($_GET["pagina"]=="parte"): ?>
                              <li class="nav-item">
                                 <a class="nav-link active" href="index.php?pagina=parte">
-                                    Parte
+                                    Partes
                                 </a>
                             </li> 
                             <?php else: ?>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?pagina=parte">
-                                        Parte
+                                        Partes
                                     </a>
                                 </li>
                             <?php endif ?>
@@ -124,7 +124,7 @@ session_start();
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="index.php?pagina=parte">
-                                        Parte
+                                        Partes
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -160,8 +160,7 @@ session_start();
               $_GET["pagina"]=="agregarFactura"||
               $_GET["pagina"]=="editar" ||
               $_GET["pagina"]=="valoresParte"||
-              $_GET["pagina"]=="reportes"
-            ) 
+              $_GET["pagina"]=="reportes"            ) 
           {
             include "paginas/".$_GET["pagina"].".php";
           }else{
