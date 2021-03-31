@@ -1,19 +1,27 @@
 <?php
 if (isset($_GET["id"])) {
-$item = "idFactura";
+$item = "idInvoice";
 $valor = $_GET["id"];
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor);
+
 }
+
+$Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 ?>
 <div class="container py-5">
-    
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div>
-            <div>
-                <div class="col">
-                    <input class="form-control  mr-sm-2" id="myInput" type="text" placeholder="Buscar">
-                </div>
-            </nav>
+        <div class="row">
+            
+            <div class="col">
+                <input class="form-control  mr-sm-2" id="myInput" type="text" placeholder="Buscar">
+            </div>
+            <form class="form-inline">
+                <a  class="btn btn-success" href="index.php?pagina=agregarFactura"  class="btn">Agregar Parte</a>
+            </form>
+        </div>
+    </nav>
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -58,4 +66,52 @@ $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor
                     <?php endforeach?>
                 </tbody>
             </table>
-        </div>
+        
+        <form method="post">
+                <h3>Agregar Partes </h3>
+                <table class="table"  id="tabla">
+                    <tr class="fila-fija">
+                        <td><input required name="idInvoice[]" placeholder="Factura" value="<?php echo $value["idInvoice"];?>"/></td>
+
+
+
+                        <td><input list="partes" required name="noParte[]" placeholder="No. Parte"/></td>
+                        
+
+                            
+ <datalist id="partes">
+    <?php foreach ($Parte as $key => $value): ?>
+        <option value="<?php echo $value['noParte']; ?>">
+     
+    <?php endforeach?>
+</datalist>
+
+          
+                     <td class="eliminar"><input type="button"   value="Eliminar"/></td>
+                    </tr>
+                </table>
+
+                <div class="btn-der">
+                    <input type="submit" name="insertar" value="Insertar Alumno" class="btn btn-info"/>
+                    <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
+
+                </div>
+            </form>
+
+            </div>
+
+<script>
+            
+            $(function(){
+                // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+                $("#adicional").on('click', function(){
+                    $("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
+                });
+             
+                // Evento que selecciona la fila y la elimina 
+                $(document).on("click",".eliminar",function(){
+                    var parent = $(this).parents().get(0);
+                    $(parent).remove();
+                });
+            });
+        </script>

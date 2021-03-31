@@ -69,7 +69,7 @@ class ControladorFormularios{
 
 	static public function ctrSeleccionarRegistrosReporteV($item, $valor){
 
-		$tabla = "reporte";
+		$tabla = "facturas_Parte";
 		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosV($tabla, $item, $valor);
 
 		return $respuesta;
@@ -115,6 +115,28 @@ class ControladorFormularios{
 				 );
 
 			$respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
+
+} 
+		return $respuesta;
+		
+		}
+	
+}
+
+static public function ctrRegistroF(){
+		if(isset($_POST["registroFactura"]) ){
+			$dir_subida = 'Imagenes/Facturas/';
+			$fichero_subido = $dir_subida . basename($_FILES['myfile']['name']);
+
+			if (move_uploaded_file($_FILES['myfile']['tmp_name'], $fichero_subido)) {
+				$tabla = "factura";
+				$datos = array(
+				"idInvoice" => $_POST["registroFactura"],
+				"ruta_factura" => $fichero_subido,
+				"fecha" => $_POST["registroFecha"]				
+				 );
+
+			$respuesta = ModeloFormularios::mdlRegistroF($tabla, $datos);
 
 } 
 		return $respuesta;

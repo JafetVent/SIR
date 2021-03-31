@@ -27,37 +27,41 @@ INSERT INTO `parte` (`noParte`, `proveedor`, `subproveedor`, `familia`, `descrip
 
 
 CREATE TABLE factura(
-    idFactura INT NOT NULL AUTO_INCREMENT,
     idInvoice INT NOT NULL,
+    ruta_factura VARCHAR(100),
     fecha DATE,
-    PRIMARY KEY(idFactura)
+    PRIMARY KEY(idInvoice)
 ); 
 
-INSERT INTO `factura` (`idFactura`, `idInvoice`, `noParte`, `fecha`) VALUES
-(1, 123456, '1', '0000-00-00'),
-(2, 123456, '1', '0000-00-00'),
-(3, 123456, '2', '0000-00-00'),
-(4, 654321, '1', '0000-00-00'),
-(5, 654321, '2', '0000-00-00');
+
+INSERT INTO `factura` (`idInvoice`, `ruta_factura`, `fecha`) VALUES
+(123456, '1', '0000-00-00'),
+(789012, '1', '0000-00-00'),
+(345678, '1', '0000-00-00'),
+(901234, '1', '0000-00-00'),
+(567890, '1', '0000-00-00');
 
 
 CREATE TABLE facturas_Parte(
     idFacPar INT NOT NULL AUTO_INCREMENT,
-    idFactura INT NOT NULL,
+    idInvoice INT NOT NULL,
     noParte VARCHAR(20) NOT NULL,
-    PRIMARY KEY(idFacPar)
+    PRIMARY KEY(idFacPar),
+    FOREIGN KEY(idInvoice) REFERENCES factura(idInvoice),
+    FOREIGN KEY(noParte) REFERENCES parte(noParte)
 );
-INSERT INTO `facturas_Parte` (`idFacPar`, `idFactura`, `noParte`) VALUES
-(1,1),
-(1,1),
-(2,1),
-(2,2),
-(3,2);
-(3,2);
-(4,1);
-(4,1);
-(5,2);
-(5,2);
+INSERT INTO `facturas_Parte` (`idInvoice`, `noParte`) VALUES
+(123456,1),
+(789012,1),
+(345678,1),
+(901234,2),
+(567890,2),
+(123456,2),
+(789012,2),
+(345678,2),
+(901234,1),
+(567890,1);
+
 
 CREATE TABLE valoresInsp(
     idValor INT NOT NULL AUTO_INCREMENT,
@@ -93,17 +97,22 @@ CREATE TABLE reporte(
     estatus VARCHAR(2) NOT NULL,
     observacion VARCHAR(60),
     PRIMARY KEY(idReporte),
-    FOREIGN KEY(noParte) REFERENCES parte(noParte),
-    FOREIGN KEY(idFactura) REFERENCES factura(idFactura),
+    FOREIGN KEY(idFacPar) REFERENCES facturas_parte(idFacPar),
     FOREIGN KEY(noTrabajador) REFERENCES usuario(noTrabajador)
 );
 
 INSERT INTO `reporte` (`idFacPar`, `noTrabajador`, `fecha`, `fechafifo`, `noPiezas`, `noCaja`, `turno`, `inspeccion1`, `inspeccion2`, `inspeccion3`, `inspeccion4`, `inspeccion5`, `estatus`, `observacion`) VALUES
-('1', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
-('2', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
-('3', 1, '0000-00-00', '0000-00-00', 13, '2b', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'NA', 'MAL'),
-('4', 1, '0000-00-00', '0000-00-00', 14, '3c', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AO', 'REGULAR'),
-('5', 1, '0000-00-00', '0000-00-00', 15, '4d', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN');
+('6', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('7', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('8', 1, '0000-00-00', '0000-00-00', 13, '2b', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'NA', 'MAL'),
+('9', 1, '0000-00-00', '0000-00-00', 14, '3c', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AO', 'REGULAR'),
+('10', 1, '0000-00-00', '0000-00-00', 15, '4d', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('11', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('12', 1, '0000-00-00', '0000-00-00', 12, '1a', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN'),
+('13', 1, '0000-00-00', '0000-00-00', 13, '2b', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'NA', 'MAL'),
+('14', 1, '0000-00-00', '0000-00-00', 14, '3c', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AO', 'REGULAR'),
+('15', 1, '0000-00-00', '0000-00-00', 15, '4d', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN');
+
 
 
 

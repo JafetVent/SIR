@@ -56,7 +56,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
                     
                     <div class="btn-group">
                         <div class="px-1">
-                            <a href="index.php?pagina=editar&id=<?php echo $value["idFactura"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href="index.php?pagina=editar&id=<?php echo $value["idInvoice"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                         </div>
                         
                         
@@ -76,6 +76,12 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
         </tbody>
     </table>
 </div>
+
+
+
+
+
+
 <script>
 $(document).ready(function(){
 $("#myInput").on("keyup", function() {

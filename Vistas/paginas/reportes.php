@@ -59,7 +59,7 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteR(null,null,nul
                         <?php echo $value["estatus"];?>
                     </td>
                     <td>
-                        <?php echo $value["fechar"];?>
+                        <?php echo $value["fecha"];?>
                     </td>
                     <td>
                         <div class="btn-group">
