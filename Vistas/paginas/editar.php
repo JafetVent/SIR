@@ -5,8 +5,11 @@ $valor = $_GET["id"];
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor);
 
 }
-
+$Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null);
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
+
+
+
 ?>
 <div class="container py-5">
 
@@ -16,10 +19,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
             <div class="col">
                 <input class="form-control  mr-sm-2" id="myInput" type="text" placeholder="Buscar">
             </div>
-            <form class="form-inline">
-                <a  class="btn btn-success" href="index.php?pagina=agregarFactura"  class="btn">Agregar Parte</a>
-            </form>
-        </div>
+                    </div>
     </nav>
 
             <table class="table table-striped">
@@ -67,7 +67,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 </tbody>
             </table>
         
-        <form method="post">
+        <form method="POST">
                 <h3>Agregar Partes </h3>
                 <table class="table"  id="tabla">
                     <tr class="fila-fija">
@@ -75,25 +75,21 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 
 
 
-                        <td><input list="partes" required name="noParte[]" placeholder="No. Parte"/></td>
-                        
-
-                            
+                        <td><input list="partes" required name="noParte[]" placeholder="No. Parte"/></td>                
  <datalist id="partes">
     <?php foreach ($Parte as $key => $value): ?>
-        <option value="<?php echo $value['noParte']; ?>">
-     
+        <option value="<?php echo $value['noParte']; ?>">     
     <?php endforeach?>
 </datalist>
+                    
+                     <td class="eliminar"><input type="button"  class="btn btn-outline-danger" value="Eliminar"/></td>
 
-          
-                     <td class="eliminar"><input type="button"   value="Eliminar"/></td>
                     </tr>
                 </table>
 
                 <div class="btn-der">
-                    <input type="submit" name="insertar" value="Insertar Alumno" class="btn btn-info"/>
-                    <button id="adicional" name="adicional" type="button" class="btn btn-warning"> Más + </button>
+                    <input type="submit" name="insertar" value="Guardar No. Partes" class="btn btn-primary"/>
+                    <button id="adicional" name="adicional" type="button" class="btn btn-success"> Agregar No.Partes </button>
 
                 </div>
             </form>

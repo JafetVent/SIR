@@ -2,9 +2,9 @@ CREATE TABLE usuario(
     noTrabajador INT NOT NULL,
     nombre VARCHAR(20),
     apellido VARCHAR(20),
-    rol VARCHAR(10) NOT NULL,
-    password VARCHAR(25) NOT NULL,
-    ruta_firma VARCHAR(100) NOT NULL,
+    rol VARCHAR(10),
+    password VARCHAR(25),
+    ruta_firma VARCHAR(100),
     PRIMARY KEY(noTrabajador)
 ); 
 
@@ -44,8 +44,8 @@ INSERT INTO `factura` (`idInvoice`, `ruta_factura`, `fecha`) VALUES
 
 CREATE TABLE facturas_Parte(
     idFacPar INT NOT NULL AUTO_INCREMENT,
-    idInvoice INT NOT NULL,
-    noParte VARCHAR(20) NOT NULL,
+    idInvoice INT,
+    noParte VARCHAR(20),
     PRIMARY KEY(idFacPar),
     FOREIGN KEY(idInvoice) REFERENCES factura(idInvoice),
     FOREIGN KEY(noParte) REFERENCES parte(noParte)
@@ -82,19 +82,19 @@ INSERT INTO `valoresinsp` (`idValor`, `noParte`, `caracteristicas`, `especificac
 
 CREATE TABLE reporte(
     idReporte INT NOT NULL AUTO_INCREMENT,
-    idFacPar INT NOT NULL,
-    noTrabajador INT NOT NULL,
-    fecha DATE NOT NULL,
-    fechafifo DATE NOT NULL,
-    noPiezas INT NOT NULL,
-    noCaja VARCHAR(25) NOT NULL,
-    turno VARCHAR(1) NOT NULL,
-    inspeccion1 VARCHAR(5) NOT NULL,
-    inspeccion2 VARCHAR(5) NOT NULL,
-    inspeccion3 VARCHAR(5) NOT NULL,
-    inspeccion4 VARCHAR(5) NOT NULL,
-    inspeccion5 VARCHAR(5) NOT NULL,
-    estatus VARCHAR(2) NOT NULL,
+    idFacPar INT,
+    noTrabajador INT,
+    fecha DATE,
+    fechafifo DATE,
+    noPiezas INT,
+    noCaja VARCHAR(25),
+    turno VARCHAR(1),
+    inspeccion1 VARCHAR(5),
+    inspeccion2 VARCHAR(5),
+    inspeccion3 VARCHAR(5),
+    inspeccion4 VARCHAR(5),
+    inspeccion5 VARCHAR(5),
+    estatus VARCHAR(2),
     observacion VARCHAR(60),
     PRIMARY KEY(idReporte),
     FOREIGN KEY(idFacPar) REFERENCES facturas_parte(idFacPar),
@@ -114,7 +114,30 @@ INSERT INTO `reporte` (`idFacPar`, `noTrabajador`, `fecha`, `fechafifo`, `noPiez
 ('15', 1, '0000-00-00', '0000-00-00', 15, '4d', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN');
 
 
+DELIMITER |
 
+CREATE TRIGGER tg_Factura
+AFTER INSERT
+ON factura 
+FOR EACH ROW BEGIN
+	
+	DECLARE new_idInvoice int;
+
+	SET new_idInvoice = NEW.idInvoice;
+
+        INSERT INTO facturas_parte(IdInvoice)
+        VALUES (new_idInvoice);
+	
+	INSERT INTO reporte(idFacPar)
+	SELECT
+	   idFacPar
+	FROM
+	   facturas_parte where idInvoice = new_idInvoice;
+		
+END
+|
+
+DELIMITER ;
 
 
 
