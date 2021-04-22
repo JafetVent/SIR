@@ -60,7 +60,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                                     ?>
                                 </form>
                                 
-                            </div>
+                            </div>                            
                         </td>
                     </tr>
                     <?php endforeach?>
@@ -111,3 +111,27 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 });
             });
         </script>
+
+        <?php
+    /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO NO ESTATICO*/
+       // $registro = new controladorFormularios();
+       // $registro -> ctrRegistro();
+
+    /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO ESTATICO*/
+        $registro = controladorFormularios::ctrRegistroFP();
+        //echo $registro;
+
+        if ($registro == "ok") {
+
+            echo '<script>
+
+                if(window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                }
+
+            </script>';
+
+            echo '<div class="alert alert-success">La partes han sido registradas</div>';
+        }
+
+    ?>

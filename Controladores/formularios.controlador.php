@@ -145,6 +145,39 @@ static public function ctrRegistroF(){
 	
 }
 
+static public function ctrRegistroFP(){
+
+		if(isset($_POST["insertar"])){
+
+			$tabla = "facturas_parte";
+
+			$items1 = ($_POST['idInvoice']);
+			$items2 = ($_POST['noParte']);
+
+			
+			while(true) {
+
+				$item1 = current($items1);
+				$item2 = current($items2);
+
+				$id=(( $item1 !== false) ? $item1 : ", &nbsp;");
+				$nop=(( $item2 !== false) ? $item2 : ", &nbsp;");
+
+				$datos = array("idInvoice" => $id,
+				           "noParte" => $nop);
+
+
+    			}
+
+			$respuesta = ModeloFormularios::mdlRegistroFP($tabla, $datos);
+
+			return $respuesta;
+
+		}
+
+	}
+
+
 /*Eliminar registro*/
 	public function ctrEliminarRegistro(){
 		if (isset($_POST["eliminarRegistro"])) {
