@@ -160,7 +160,9 @@ session_start();
               $_GET["pagina"]=="agregarFactura"||
               $_GET["pagina"]=="editar" ||
               $_GET["pagina"]=="valoresParte"||
-              $_GET["pagina"]=="reportes"            ) 
+              $_GET["pagina"]=="reportes"||
+              $_GET["pagina"]=="agregarCaracteristicas"||
+              $_GET["pagina"]=="reporteInspeccion") 
           {
             include "paginas/".$_GET["pagina"].".php";
           }else{
