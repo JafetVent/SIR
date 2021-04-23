@@ -76,6 +76,15 @@ class ControladorFormularios{
 		
 	}
 
+	static public function ctrSeleccionarRegistrosReporteVarPar($item, $valor){
+
+		$tabla = "valoresinsp";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVarPar($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
 	static public function ctrSeleccionarRegistrosReporteR($item, $valor){
 
 		$tabla = "reporte";

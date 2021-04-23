@@ -144,6 +144,19 @@ class ModeloFormularios{
 
 	}
 
+	static public function mdlSeleccionarRegistrosVarPar($tabla, $item, $valor){		
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN parte on parte.noParte = valoresinsp.noParte WHERE valoresinsp.$item = :$item");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+
+			$data = array();
+			while ($row =  $stmt -> fetch(PDO::FETCH_ASSOC)) {
+				$data[] = $row;
+			}
+			return $data;
+
+	}
+
 	static public function mdlSeleccionarRegistrosR($tabla, $item, $valor){	
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar");
 			$stmt -> execute();
