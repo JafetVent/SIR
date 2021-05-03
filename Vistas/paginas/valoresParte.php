@@ -12,10 +12,6 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 <div class="container py-5">
 <div class="d-flex justify-content-center text-center">
 
-    <div>
-         <?php echo "<img src='".$value["ruta_imagen"]."' height ='100' width ='100' >";?>
-    </div>
-
  <table class="table table-striped">
                 <thead>
                     <tr>
