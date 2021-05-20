@@ -48,6 +48,7 @@ class ControladorFormularios{
 		return $respuesta;
 		
 	}
+	
 
 	static public function ctrSeleccionarRegistrosParte($item, $valor){
 
@@ -212,6 +213,26 @@ static public function ctrRegistroFP(){
 		}
 	}
 
+/*Guardar Registro inspecciones*/
+	public function ctrGuardarRegistro(){
+		if(isset($_POST["guardarRegistro"])){
+
+			$tabla = "inspecciones";
+
+			$datos = array("idFacPar" => $_POST["idFacPar"],
+				           "i1" => $_POST["i1"],
+				           "i2" => $_POST["i2"],
+				           "i3" => $_POST["i3"],
+				           "i4" => $_POST["i4"],
+				           "i5" => $_POST["i5"]);
+
+			$respuesta = ModeloFormularios::mdlGuardarRegistro($tabla, $datos);
+
+			return $respuesta;
+
+		}
+
+	}
 
 }
 

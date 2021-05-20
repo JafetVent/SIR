@@ -80,6 +80,18 @@ INSERT INTO `valoresinsp` (`idValor`, `noParte`, `caracteristicas`, `especificac
 (3, '2', 'carac3', 'espec3', 'equipo3', 'min', 'max'),
 (4, '2', 'carac4', 'espec4', 'equipo4', 'min', 'max');
 
+CREATE TABLE inspecciones(
+    idInspeccion INT NOT NULL AUTO_INCREMENT,
+    idFacPar INT NOT NULL,
+    i1 VARCHAR(80) NOT NULL,
+    i2 VARCHAR(80) NOT NULL,
+    i3 VARCHAR(80) NOT NULL,
+    i4 VARCHAR(80) NOT NULL,
+    i5 VARCHAR(80) NOT NULL,
+    PRIMARY KEY(idInspeccion),
+    FOREIGN KEY(idFacPar) REFERENCES facturas_Parte(idFacPar)
+);
+
 CREATE TABLE reporte(
     idReporte INT NOT NULL AUTO_INCREMENT,
     idFacPar INT,
@@ -89,11 +101,6 @@ CREATE TABLE reporte(
     noPiezas INT,
     noCaja VARCHAR(25),
     turno VARCHAR(1),
-    inspeccion1 VARCHAR(5),
-    inspeccion2 VARCHAR(5),
-    inspeccion3 VARCHAR(5),
-    inspeccion4 VARCHAR(5),
-    inspeccion5 VARCHAR(5),
     estatus VARCHAR(2),
     observacion VARCHAR(60),
     PRIMARY KEY(idReporte),

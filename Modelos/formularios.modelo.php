@@ -102,6 +102,41 @@ class ModeloFormularios{
 
 	}
 
+	static public function mdlGuardarRegistro($tabla, $datos){
+
+		#statement: declaración
+
+		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idFacPar,i1, i2, i3, i4, i5) VALUES (:idFacPar, :i1, :i2, :i3, :i4, :i5)");
+
+		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+		$stmt->bindParam(":idFacPar", $datos["idFacPar"], PDO::PARAM_STR);	
+		$stmt->bindParam(":i1", $datos["i1"], PDO::PARAM_STR);
+		$stmt->bindParam(":i2", $datos["i2"], PDO::PARAM_STR);
+		$stmt->bindParam(":i3", $datos["i3"], PDO::PARAM_STR);
+		$stmt->bindParam(":i4", $datos["i4"], PDO::PARAM_STR);
+		$stmt->bindParam(":i5", $datos["i5"], PDO::PARAM_STR);
+
+		
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			print_r(Conexion::conectar()->errorInfo());
+
+		}
+
+		$stmt->close();
+
+		$stmt = null;	
+
+	}
+
+
 /*=============================================
 	Seleccionar Registro
 	=============================================*/

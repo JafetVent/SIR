@@ -3,14 +3,30 @@ if (isset($_GET["id"])) {
 $item = "noParte";
 $valor = $_GET["id"];
 $varPar = ControladorFormularios::ctrSeleccionarRegistrosReporteVarPar($item, $valor);
+$Parte = ControladorFormularios::ctrSeleccionarRegistrosParte($item, $valor);
 
 }
 $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null);
-$Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
+
 ?>
 
-<div class="container py-5">
+
+<div class="container py-4">
+    <div class="row">
+    <div class="col-sm-3" style="background-color:white-space: ;">
+        <?php echo "<img src='".$Parte["ruta_imagen"]."' height ='200' width ='300' >";?>
+    </div>
+    <div class="col-sm-4" style="background-color:white;">
+        <h3> No. Parte: <?php echo $Parte["noParte"];?></h3>
+        <h4>Proveedor: <?php echo $Parte["proveedor"];?></h4>
+        <h5>Subproveedor: <?php echo $Parte["subproveedor"];?></h5>
+    </div>
+    </div>
+
+
 <div class="d-flex justify-content-center text-center">
+
+
 
  <table class="table table-striped">
                 <thead>
@@ -54,7 +70,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                         </td>
                         <td>
                                 <form method="POST">
-                                    <input type="hidden" value="<?php echo $value["noParte"]; ?>" name="">
+                                    <input type="hidden" value="<?php echo $value["noParte"]; ?>" name="guardarRegistro">
                                     <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     <?php
                                     $eliminar = new ControladorFormularios();
