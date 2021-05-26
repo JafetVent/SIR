@@ -4,6 +4,7 @@ $item = "noParte";
 $valor = $_GET["id"];
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte($item, $valor);
 $varPar = ControladorFormularios::ctrSeleccionarRegistrosReporteVarPar($item, $valor);
+$reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
 }
 
 ?>
@@ -49,6 +50,9 @@ $varPar = ControladorFormularios::ctrSeleccionarRegistrosReporteVarPar($item, $v
  <table class="table table-striped">
                 <thead>
                     <tr>
+                    	<th>
+                            #
+                        </th>
                         <th>
                             Caracteristica
                         </th>
@@ -86,6 +90,9 @@ $varPar = ControladorFormularios::ctrSeleccionarRegistrosReporteVarPar($item, $v
                     <tbody id="myTable">
                     <?php foreach ($varPar as $key => $value): ?>
                     <tr>
+                    	<td>
+                            <?php echo $reporte["idReporte"];?>
+                        </td>
                         <td>
                             <?php echo $value["caracteristicas"];?>
                         </td>
