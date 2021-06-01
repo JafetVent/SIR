@@ -59,6 +59,15 @@ class ControladorFormularios{
 		
 	}
 
+	static public function ctrSeleccionarRegistrosParteVista($item, $valor){
+
+		$tabla = "parte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosParteVista($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
 	static public function ctrSeleccionarRegistrosReporte($item, $valor){
 
 		$tabla = "reporte";
@@ -99,6 +108,15 @@ class ControladorFormularios{
 
 		$tabla = "factura";
 		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosF($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+	static public function ctrSeleccionarRegistrosReporteInspeccion($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosReporteInspeccion($tabla, $item, $valor);
 
 		return $respuesta;
 		

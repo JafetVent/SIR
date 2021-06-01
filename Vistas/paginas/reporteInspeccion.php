@@ -1,10 +1,9 @@
 <?php
 if (isset($_GET["id"])) {
-$item = "noParte";
+$item = "idFacPar";
 $valor = $_GET["id"];
-$Parte = ControladorFormularios::ctrSeleccionarRegistrosParte($item, $valor);
-$varPar = ControladorFormularios::ctrSeleccionarRegistrosReporteVarPar($item, $valor);
-$reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor);
+$Parte = ControladorFormularios::ctrSeleccionarRegistrosParteVista($item, $valor);
+$reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteInspeccion($item, $valor);
 }
 ?>
 <style type="text/css">
@@ -13,19 +12,21 @@ $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporte($item, $valor)
 border-radius: 3%;
 }
 </style>
+
+
+
 <div class="container-fluid py-5">
 	<div class="row">
-		<div class="col-sm-4" style="background-color:white-space: ;">
-			<?php echo "<img src='".$Parte["ruta_imagen"]."' height ='200' width ='300' >";?>
+		<div  style="background-color:white-space: ;">
+			<?php echo "<img src='".$Parte["ruta_imagen"]."' height ='200' width ='320.33' >";?>
 		</div>
-		<div class="col-sm-8" style="background-color:white;">
+		<div  style="background-color:white;">
 			<h3> No. Parte: <?php echo $Parte["noParte"];?></h3>
 			<h4> Proveedor: <?php echo $Parte["proveedor"];?></h4>
 			<h5> Subproveedor: <?php echo $Parte["subproveedor"];?></h5>
 		</div>
 	</div>
 </div>
-
 <div class="container">
 	<form>
 		<div class="form-group row">
@@ -49,8 +50,8 @@ border-radius: 3%;
 	</form>
 </div>
 <!-- <div class="container py-5">
-		<form class="form-inline" action="/action_page.php">
-				<label for="fecha"> Fecha: </label>
+			<form class="form-inline" action="/action_page.php">
+						<label for="fecha"> Fecha: </label>
 		<input type="date" name="registroFecha" step="1" min="" max="" value="<?php echo date("Y-m-d");?>" id="fecha">
 		<label for="fechafifo"> FechaFifo</label>
 		<input type="date" name="registroFechafifo" step="1" min="" max="" value="<?php echo date("Y-m-d");?>" id="fechafifo">
@@ -61,10 +62,9 @@ border-radius: 3%;
 	</form>
 </div> -->
 <datalist id="turno">
-	<option value="A">
+<option value="A">
 	<option value="B">
-</datalist>
-
+		</datalist>
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -98,11 +98,11 @@ border-radius: 3%;
 						</th>
 						<th>
 							I5
-						</th>						
+						</th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
-					<?php foreach ($varPar as $key => $value): ?>
+					<?php foreach ($reporte as $key => $value): ?>
 					<tr>
 						<td>
 							<?php echo $value["caracteristicas"];?>
@@ -137,7 +137,7 @@ border-radius: 3%;
 						<td>
 							<div class="btn-group">
 								<form method="POST">
-									<input type="hidden" value="<?php echo $value["noParte"]; ?>" name="guardarRegistro">
+									<input type="hidden" value="<?php echo $value["idReporte"]; ?>" name="guardarRegistro">
 									<button type="submit"class="btn btn-success"><i class="far fa-check-circle"></i></button>
 									<?php
 									$guardar = new ControladorFormularios();
@@ -150,27 +150,24 @@ border-radius: 3%;
 					</tbody>
 				</table>
 			</div>
-
 			<div class="container py-3">
 				<form class="form-inline" action="/action_page.php">
 					<div class="form-group">
 						<label for="estatus"> Estatus: </label>
 						<input list="estatus" name="estatus">
 					</div>
-						<datalist id="estatus">
-							<option value="AA">
-							<option value="NA">
+					<datalist id="estatus">
+					<option value="AA">
+						<option value="NA">
 							<option value="AO">
-						</datalist>
-
-						<div class="form-group">
-							<label for="observacion"> Observaciones: </label>
-							<input type="text" name="observacion" id="observacion">
+								</datalist>
+								<div class="form-group">
+									<label for="observacion"> Observaciones: </label>
+									<input type="text" name="observacion" id="observacion">
+								</div>
+							</form>
 						</div>
-				</form>
-			</div>
-
-			<div class="d-flex justify-content-center h-100 d-inline-block p-2">
-				<input type="submit" name="insertar" value="Guardar" class="btn btn-success"/>
-				<button id="adicional" name="adicional" type="button" class="btn btn-danger"> Cancelar </button>
-			</div>
+						<div class="d-flex justify-content-center h-100 d-inline-block p-2">
+							<input type="submit" name="insertar" value="Guardar" class="btn btn-success"/>
+							<button id="adicional" name="adicional" type="button" class="btn btn-danger"> Cancelar </button>
+						</div>

@@ -205,6 +205,47 @@ class ModeloFormularios{
 
 			return $stmt -> fetchALL();
 	}
+
+	static public function mdlSeleccionarRegistrosReporteInspeccion($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("	SELECT * FROM $tabla 
+													JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar
+													JOIN parte ON facturas_parte.noParte = parte.noParte
+													JOIN valoresinsp ON parte.noParte = valoresinsp.noParte
+													WHERE facturas_parte.$item = :$item");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+
+			$data = array();
+			while ($row =  $stmt -> fetch(PDO::FETCH_ASSOC)) {
+				$data[] = $row;
+			}
+			return $data;
+	}
+
+static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){
+
+		if ($item == null && $valor == null) {
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+			$stmt -> execute();
+
+			return $stmt -> fetchALL();
+
+				
+		}else{
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla 
+													JOIN facturas_parte ON parte.noParte = facturas_parte.noParte
+													WHERE facturas_parte.$item = :$item");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+				
+	}
 }
 
 ?>
