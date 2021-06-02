@@ -78,13 +78,17 @@ class ModeloFormularios{
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idInvoice, noParte) VALUES (:idInvoice, :noParte)");
+		
+
+		for ($i=0; $i < count($datos); $i++) { 
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idInvoice, noParte) VALUES (:idInvoice, :noParte)");
+		
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 		$stmt->bindParam(":idInvoice", $datos["idInvoice"], PDO::PARAM_STR);	
 		$stmt->bindParam(":noParte", $datos["noParte"], PDO::PARAM_STR);
 
-		
+		}
 
 		if($stmt->execute()){
 
@@ -95,10 +99,12 @@ class ModeloFormularios{
 			print_r(Conexion::conectar()->errorInfo());
 
 		}
+		
 
 		$stmt->close();
 
-		$stmt = null;	
+		$stmt = null;
+			
 
 	}
 
@@ -167,7 +173,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosV($tabla, $item, $valor){		
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla  WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 

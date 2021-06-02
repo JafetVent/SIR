@@ -71,9 +71,9 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 <h3>Agregar Partes </h3>
                 <table class="table"  id="tabla">
                     <tr class="fila-fija">
-                        <td><input required name="idInvoice[]" placeholder="Factura" value="<?php echo $value["idInvoice"];?>"/></td>s
+                        <td><input required name="idInvoice" placeholder="Factura" value="<?php echo $value["idInvoice"];?>"/></td>
 
-                        <td><input list="partes" required name="noParte[]" placeholder="No. Parte"/></td>                
+                        <td><input list="partes" required name="noParte" placeholder="No. Parte"/></td>                
  <datalist id="partes">
     <?php foreach ($Parte as $key => $value): ?>
         <option value="<?php echo $value['noParte']; ?>">     

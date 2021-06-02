@@ -79,7 +79,7 @@ class ControladorFormularios{
 
 	static public function ctrSeleccionarRegistrosReporteV($item, $valor){
 
-		$tabla = "facturas_Parte";
+		$tabla = "facturas_parte";
 		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosV($tabla, $item, $valor);
 
 		return $respuesta;
@@ -175,35 +175,16 @@ static public function ctrRegistroF(){
 
 static public function ctrRegistroFP(){
 
-		if(isset($_POST["insertar"])){
+	if(isset($_POST["insertar"])){
 
-			$tabla = "facturas_parte";
+		$tabla = "facturas_parte";
+		$datos = array("idInvoice" => $_POST["idInvoice"], "noParte" => $_POST["noParte"]);
 
-			$items1 = ($_POST['idInvoice']);
-			$items2 = ($_POST['noParte']);
+		$respuesta = ModeloFormularios::mdlRegistroFP($tabla, $datos);
 
-			
-			while(true) {
-
-				$item1 = current($items1);
-				$item2 = current($items2);
-
-				$id=(( $item1 !== false) ? $item1 : ", &nbsp;");
-				$nop=(( $item2 !== false) ? $item2 : ", &nbsp;");
-
-				$datos = array("idInvoice" => $id,
-				           "noParte" => $nop);
-
-
-    			}
-
-			$respuesta = ModeloFormularios::mdlRegistroFP($tabla, $datos);
-
-			return $respuesta;
-
-		}
-
+		return $respuesta;
 	}
+}
 
 
 /*Eliminar registro*/
