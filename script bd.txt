@@ -132,7 +132,7 @@ FOR EACH ROW BEGIN
 
 	SET new_idInvoice = NEW.idInvoice;
 
-        INSERT INTO facturas_parte(IdInvoice)
+        INSERT INTO facturas_parte(idInvoice)
         VALUES (new_idInvoice);
 	
 	INSERT INTO reporte(idFacPar)
@@ -146,6 +146,12 @@ END
 
 DELIMITER ;
 
-
+DELIMITER $$
+CREATE TRIGGER prueba AFTER INSERT ON facturas_parte FOR EACH ROW 
+BEGIN
+  INSERT INTO reporte (idFacPar)
+  VALUES (new.idFacPar);
+END $$
+DELIMITER ;
 
 

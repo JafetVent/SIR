@@ -178,7 +178,12 @@ static public function ctrRegistroFP(){
 	if(isset($_POST["insertar"])){
 
 		$tabla = "facturas_parte";
-		$datos = array("idInvoice" => $_POST["idInvoice"], "noParte" => $_POST["noParte"]);
+
+		
+		$datos = array
+					  ("idInvoice" => $_POST["idInvoice"], 
+					   "noParte" => $_POST["noParte"]);
+
 
 		$respuesta = ModeloFormularios::mdlRegistroFP($tabla, $datos);
 
