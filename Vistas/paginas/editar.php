@@ -86,7 +86,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 </table>
 
                 <div class="btn-der">
-                    <input type="submit" name="insertar" value="Guardar No. Partes" class="btn btn-primary"/>
+                    <input  type="submit" name="insertar" value="Guardar No. Partes" class="btn btn-primary"/>
                     <button id="adicional" name="adicional" type="button" class="btn btn-success"> Agregar No.Partes </button>
 
                 </div>
