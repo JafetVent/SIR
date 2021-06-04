@@ -166,6 +166,7 @@ static public function ctrRegistroF(){
 
 			$respuesta = ModeloFormularios::mdlRegistroF($tabla, $datos);
 
+
 } 
 		return $respuesta;
 		
@@ -180,12 +181,8 @@ static public function ctrRegistroFP(){
 		$tabla = "facturas_parte";
 
 	
-		$datos = array("idInvoice" => $_POST['idInvoice'][$i], 
-					   "noParte" => $_POST['noParte'][$i]);
-
-
-		
-
+		$datos = array("idInvoice" => $_POST['idInvoice'], 
+					   "noParte" => $_POST['noParte']);
 
 		$respuesta = ModeloFormularios::mdlRegistroFP($tabla, $datos);
 
