@@ -80,17 +80,6 @@ INSERT INTO `valoresinsp` (`idValor`, `noParte`, `caracteristicas`, `especificac
 (3, '2', 'carac3', 'espec3', 'equipo3', 'min', 'max'),
 (4, '2', 'carac4', 'espec4', 'equipo4', 'min', 'max');
 
-CREATE TABLE inspecciones(
-    idInspeccion INT NOT NULL AUTO_INCREMENT,
-    idReporte INT NOT NULL,
-    i1 VARCHAR(80) NOT NULL,
-    i2 VARCHAR(80) NOT NULL,
-    i3 VARCHAR(80) NOT NULL,
-    i4 VARCHAR(80) NOT NULL,
-    i5 VARCHAR(80) NOT NULL,
-    PRIMARY KEY(idInspeccion),
-    FOREIGN KEY(idReporte) REFERENCES reporte(idReporte)
-);
 
 CREATE TABLE reporte(
     idReporte INT NOT NULL AUTO_INCREMENT,
@@ -120,6 +109,17 @@ INSERT INTO `reporte` (`idFacPar`, `noTrabajador`, `fecha`, `fechafifo`, `noPiez
 ('14', 1, '0000-00-00', '0000-00-00', 14, '3c', 'A', 'OK', 'OK', 'OK', 'OK', 'OK', 'AO', 'REGULAR'),
 ('15', 1, '0000-00-00', '0000-00-00', 15, '4d', 'B', 'OK', 'OK', 'OK', 'OK', 'OK', 'AA', 'BIEN');
 
+CREATE TABLE inspecciones(
+    idInspeccion INT NOT NULL AUTO_INCREMENT,
+    idReporte INT NOT NULL,
+    i1 VARCHAR(80) NOT NULL,
+    i2 VARCHAR(80) NOT NULL,
+    i3 VARCHAR(80) NOT NULL,
+    i4 VARCHAR(80) NOT NULL,
+    i5 VARCHAR(80) NOT NULL,
+    PRIMARY KEY(idInspeccion),
+    FOREIGN KEY(idReporte) REFERENCES reporte(idReporte)
+);
 
 DELIMITER |
 

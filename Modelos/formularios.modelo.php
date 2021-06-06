@@ -79,17 +79,23 @@ class ModeloFormularios{
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
 		$arr_length = count($datos["idInvoice"]);
-		echo $arr_length;
-
-		// echo $arr_length;
+		//echo $arr_length;
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idInvoice, noParte) VALUES (:idInvoice, :noParte)");		
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+
+		// foreach ($datos["idInvoice"] as $i => $value) {
+		// $stmt->bindParam(":idInvoice", $datos["idInvoice"][$i], PDO::PARAM_STR);	
+		// $stmt->bindParam(":noParte", $datos["noParte"][$i], PDO::PARAM_STR);
+
+		// $stmt->execute();
+		// }
+
 		for ($i = 0; $i <= $arr_length ; $i++){
 		$stmt->bindParam(":idInvoice", $datos["idInvoice"][$i], PDO::PARAM_STR);	
 		$stmt->bindParam(":noParte", $datos["noParte"][$i], PDO::PARAM_STR);
-
+		echo " ".$datos["idInvoice"][$i];
 		$stmt->execute();
 	
 		}
@@ -104,11 +110,6 @@ class ModeloFormularios{
 		
 		$stmt->close();
 		$stmt = null;	
-
-	// 	for ($i = 0; $i < count($datos["idInvoice"]) ; $i++){
-	// 	echo "	idInvoice:".$datos["idInvoice"][$i];
-	// 	echo "	noParte:".$datos["noParte"][$i];
-	// }
 }
 	static public function mdlGuardarRegistro($tabla, $datos){
 
