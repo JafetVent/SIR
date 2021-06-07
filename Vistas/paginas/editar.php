@@ -52,8 +52,8 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                                     <a href="index.php?pagina=reporteInspeccion&id=<?php echo $value["noParte"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                                 </div>
                                 <form method="POST">
-                                    <input type="hidden" value="<?php echo $value["idInvoice"]; ?>" name="">
-                                    <button type="submit"class="btn btn-info"><i class="fas fa-search"></i></button>
+                                    <input type="hidden" value="<?php echo $value["idInvoice"]; ?>" name="eliminarRegistro">
+                                    <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     <?php
                                     $eliminar = new ControladorFormularios();
                                     $eliminar -> ctrEliminarRegistro();

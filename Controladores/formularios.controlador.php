@@ -194,7 +194,7 @@ static public function ctrRegistroFP(){
 	public function ctrEliminarRegistro(){
 		if (isset($_POST["eliminarRegistro"])) {
 
-			$tabla = "registros";
+			$tabla = "facturas_parte";
 			$valor = $_POST["eliminarRegistro"];
 
 			$respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
@@ -206,7 +206,7 @@ static public function ctrRegistroFP(){
 					window.history.replaceState(null, null, window.location.href);
 				}
 
-				window.location = "index.php?pagina=inicio";
+				window.location = "index.php?pagina=pagina=reporteInspeccion&id=<?php echo $value["idInvoice"]; ?>";
 
 				</script>';
 			}

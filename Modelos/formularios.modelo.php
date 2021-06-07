@@ -3,7 +3,8 @@
 require_once "conexion.php";
 
 class ModeloFormularios{
-	/*=============================================
+
+/*=============================================
 	Registro
 	=============================================*/
 
@@ -79,7 +80,7 @@ class ModeloFormularios{
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
 		$arr_length = count($datos["idInvoice"]);
-		//echo $arr_length;
+		 echo " largo del arreglo: ".$arr_length;
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idInvoice, noParte) VALUES (:idInvoice, :noParte)");		
 
@@ -92,14 +93,20 @@ class ModeloFormularios{
 		// $stmt->execute();
 		// }
 
-		for ($i = 0; $i <= $arr_length ; $i++){
+
+		for ($i = 0; $i < $arr_length ; $i++){
 		$stmt->bindParam(":idInvoice", $datos["idInvoice"][$i], PDO::PARAM_STR);	
 		$stmt->bindParam(":noParte", $datos["noParte"][$i], PDO::PARAM_STR);
-		echo " ".$datos["idInvoice"][$i];
+		 echo " idInvoice: ".$datos["idInvoice"][$i];
+		 echo " no. Parte: ".$datos["noParte"][$i];
 		$stmt->execute();
+		 var_dump($datos["idInvoice"][$i]);
+		 var_dump($stmt);
 	
 		}
 		if($stmt->execute()){
+			
+
 			return "ok";
 
 		 }else{
@@ -107,10 +114,10 @@ class ModeloFormularios{
 		 	print_r(Conexion::conectar()->errorInfo());
 
 		 }
+		 $stmt->close();
+		 $stmt = null; 
 		
-		$stmt->close();
-		$stmt = null;	
-}
+		}
 	static public function mdlGuardarRegistro($tabla, $datos){
 
 		#statement: declaración
@@ -255,6 +262,32 @@ static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){
 		$stmt = null;
 				
 	}
-}
 
+
+/*=============================================
+	Eliminar Registro
+	=============================================*/
+	static public function mdlEliminarRegistro($tabla, $valor){
+	
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE noParte = :noParte");
+
+		$stmt->bindParam(":noParte", $valor, PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			print_r(Conexion::conectar()->errorInfo());
+
+		}
+
+		$stmt->close();
+
+		$stmt = null;	
+
+}
+}
+	
 ?>
