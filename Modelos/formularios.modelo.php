@@ -82,7 +82,7 @@ class ModeloFormularios{
 		$arr_length = count($datos["idInvoice"]);
 		 echo " largo del arreglo: ".$arr_length;
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idInvoice, noParte) VALUES (:idInvoice, :noParte)");		
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idInvoice, noParte) VALUES (:idInvoice, :noParte);");		
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 
@@ -100,22 +100,25 @@ class ModeloFormularios{
 		 echo " idInvoice: ".$datos["idInvoice"][$i];
 		 echo " no. Parte: ".$datos["noParte"][$i];
 		$stmt->execute();
+		
 		 var_dump($datos["idInvoice"][$i]);
 		 var_dump($stmt);
 	
 		}
-		if($stmt->execute()){
-			
+
+		if($stmt->execute()){		
 
 			return "ok";
+
 
 		 }else{
 
 		 	print_r(Conexion::conectar()->errorInfo());
 
 		 }
-		 $stmt->close();
-		 $stmt = null; 
+		  $stmt->close();
+		  $stmt = null;
+		 
 		
 		}
 	static public function mdlGuardarRegistro($tabla, $datos){
@@ -183,7 +186,9 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosV($tabla, $item, $valor){		
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT idInvoice, noParte, estatus FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
+
+							//SELECT DISTINCT * FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 

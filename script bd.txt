@@ -12,7 +12,7 @@ INSERT INTO `usuario` (`noTrabajador`, `nombre`, `apellido`, `rol`, `ruta_firma`
 (1, 'Jafet', 'Ventura', 'admin', '', '1234');
 
 CREATE TABLE parte(
-    noParte VARCHAR(20) NOT NULL,
+    noParte VARCHAR(20) NOT NULL UNIQUE,
     proveedor VARCHAR(25) NOT NULL,
     subproveedor VARCHAR(25),
     familia VARCHAR(25) NOT NULL,
@@ -119,4 +119,16 @@ BEGIN
 END $$
 DELIMITER ;
 
+//solucion temporal para el duplicado de datos
+SELECT DISTINCT
+    idInvoice,noParte
+FROM
+    facturas_parte
+WHERE
+	idInvoice = 123456
+ORDER BY 
+    idInvoice, noParte;
 
+INSERT IGNORE INTO tabla values 
+
+SELECT DISTINCT idInvoice, noParte, estatus FROM facturas_parte JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE facturas_parte.idInvoice = 789012
