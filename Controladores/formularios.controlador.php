@@ -189,6 +189,25 @@ static public function ctrRegistroFP(){
 	}
 }
 
+static public function ctrRegistroC(){
+
+	if(isset($_POST["insertar"])){
+	
+		$tabla = "valoresinsp";
+	
+		$datos = array("noParte" => $_POST['noParte'],
+					   "caracteristicas" => $_POST['caracteristicas'], 
+					   "especificacion" => $_POST['especificacion'],
+					   "equipo" => $_POST['equipo'],
+					   "toleranciamin" => $_POST['toleranciamin'],
+					   "toleranciamax" => $_POST['toleranciamax']);
+
+		$respuesta = ModeloFormularios::mdlRegistroC($tabla, $datos);
+
+		return $respuesta;
+	}
+}
+
 
 /*Eliminar registro*/
 	public function ctrEliminarRegistro(){
@@ -221,7 +240,7 @@ static public function ctrRegistroFP(){
 
 			$tabla = "inspecciones";
 
-			$datos = array("idFacPar" => $_POST["idFacPar"],
+			$datos = array("idReporte" => $_POST["idReporte"],
 				           "i1" => $_POST["i1"],
 				           "i2" => $_POST["i2"],
 				           "i3" => $_POST["i3"],

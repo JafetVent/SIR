@@ -3,7 +3,6 @@ if (isset($_GET["id"])) {
 $item = "idInvoice";
 $valor = $_GET["id"];
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor);
-
 }
 $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null);
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
@@ -24,7 +23,9 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr><th>
+                            
+                        </th>
                         <th>
                             No. Parte
                         </th>
@@ -40,6 +41,9 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 <tbody id="myTable">
                     <?php foreach ($reporte as $key => $value): ?>
                     <tr>
+                        <td style="visibility:hidden;">
+                            <?php echo $value["idFacPar"];?>
+                        </td>
                         <td>
                             <?php echo $value["noParte"];?>
                         </td>
@@ -52,7 +56,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                                     <a href="index.php?pagina=reporteInspeccion&id=<?php echo $value["noParte"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                                 </div>
                                 <form method="POST">
-                                    <input type="hidden" value="<?php echo $value["idInvoice"]; ?>" name="eliminarRegistro">
+                                    <input type="hidden" value="<?php echo $value["idFacPar"]; ?>" name="eliminarRegistro">
                                     <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     <?php
                                     $eliminar = new ControladorFormularios();

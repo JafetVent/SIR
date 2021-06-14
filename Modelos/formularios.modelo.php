@@ -116,7 +116,61 @@ class ModeloFormularios{
 		 	print_r(Conexion::conectar()->errorInfo());
 
 		 }
-		  $stmt->close();
+		  
+		  $stmt = null;
+		 
+		
+		}
+
+
+	static public function mdlRegistroC($tabla, $datos){
+
+		#statement: declaración
+
+		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
+
+		$arr_length = count($datos["noParte"]);
+		//  echo " largo del arreglo: ".$arr_length;
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax) 
+			                                   VALUES (:noParte, :caracteristicas, :especificacion, :equipo, :toleranciamin, :toleranciamax);");		
+
+		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+
+		// foreach ($datos["idInvoice"] as $i => $value) {
+		// $stmt->bindParam(":idInvoice", $datos["idInvoice"][$i], PDO::PARAM_STR);	
+		// $stmt->bindParam(":noParte", $datos["noParte"][$i], PDO::PARAM_STR);
+
+		// $stmt->execute();
+		// }
+
+
+		for ($i = 0; $i < $arr_length ; $i++){	
+		$stmt->bindParam(":noParte", $datos["noParte"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":caracteristicas", $datos["caracteristicas"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":especificacion", $datos["especificacion"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":equipo", $datos["equipo"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":toleranciamin", $datos["toleranciamin"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":toleranciamax", $datos["toleranciamax"][$i], PDO::PARAM_STR);
+		 // echo " idInvoice: ".$datos["idInvoice"][$i];
+		 // echo " no. Parte: ".$datos["noParte"][$i];
+		$stmt->execute();
+		
+		 // var_dump($datos["idInvoice"][$i]);
+		 // var_dump($stmt);
+	
+		}
+
+		if($stmt->execute()){		
+
+			return "ok";
+
+
+		 }else{
+
+		 	print_r(Conexion::conectar()->errorInfo());
+
+		 }
 		  $stmt = null;
 		 
 		
@@ -127,10 +181,10 @@ class ModeloFormularios{
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idFacPar,i1, i2, i3, i4, i5) VALUES (:idFacPar, :i1, :i2, :i3, :i4, :i5)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idReporte,i1, i2, i3, i4, i5) VALUES (:idReporte, :i1, :i2, :i3, :i4, :i5)");
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
-		$stmt->bindParam(":idFacPar", $datos["idFacPar"], PDO::PARAM_STR);	
+		$stmt->bindParam(":idReporte", $datos["idReporte"], PDO::PARAM_STR);	
 		$stmt->bindParam(":i1", $datos["i1"], PDO::PARAM_STR);
 		$stmt->bindParam(":i2", $datos["i2"], PDO::PARAM_STR);
 		$stmt->bindParam(":i3", $datos["i3"], PDO::PARAM_STR);
@@ -148,8 +202,6 @@ class ModeloFormularios{
 			print_r(Conexion::conectar()->errorInfo());
 
 		}
-
-		$stmt->close();
 
 		$stmt = null;	
 
@@ -186,7 +238,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosV($tabla, $item, $valor){		
-			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT idInvoice, noParte, estatus FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT facturas_parte.idFacPar, idInvoice, noParte, estatus FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
 
 							//SELECT DISTINCT * FROM $tabla JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -201,7 +253,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosVarPar($tabla, $item, $valor){		
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN parte on parte.noParte = valoresinsp.noParte WHERE valoresinsp.$item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT caracteristicas, especificacion, equipo, toleranciamin, toleranciamax FROM $tabla JOIN parte on parte.noParte = valoresinsp.noParte WHERE valoresinsp.$item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 
@@ -214,7 +266,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosR($tabla, $item, $valor){	
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar");
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT * FROM $tabla JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar");
 			$stmt -> execute();
 
 			return $stmt -> fetchALL();
@@ -274,9 +326,9 @@ static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){
 	=============================================*/
 	static public function mdlEliminarRegistro($tabla, $valor){
 	
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE noParte = :noParte");
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idFacPar = :idFacPar");
 
-		$stmt->bindParam(":noParte", $valor, PDO::PARAM_STR);
+		$stmt->bindParam(":idFacPar", $valor, PDO::PARAM_STR);
 
 		if($stmt->execute()){
 

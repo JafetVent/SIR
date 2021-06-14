@@ -70,6 +70,9 @@ border-radius: 3%;
 				<thead>
 					<tr>
 						<th>
+							 
+						</th>
+						<th>
 							Caracteristica
 						</th>
 						<th>
@@ -104,6 +107,9 @@ border-radius: 3%;
 				<tbody id="myTable">
 					<?php foreach ($reporte as $key => $value): ?>
 					<tr>
+						<td style="visibility:hidden;">
+							<?php echo $value["idReporte"];?>
+						</td>
 						<td>
 							<?php echo $value["caracteristicas"];?>
 						</td>
@@ -140,8 +146,21 @@ border-radius: 3%;
 									<input type="hidden" value="<?php echo $value["idReporte"]; ?>" name="guardarRegistro">
 									<button type="submit"class="btn btn-success"><i class="far fa-check-circle"></i></button>
 									<?php
-									$guardar = new ControladorFormularios();
-									$guardar -> ctrGuardarRegistro();
+									        $registro = controladorFormularios::ctrGuardarRegistro();
+        //echo $registro;
+
+        if ($registro == "ok") {
+
+            echo '<script>
+
+                if(window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                }
+
+            </script>';
+
+            echo '<div class="alert alert-success">La partes han sido registradas</div>';
+        }
 									?>
 								</form>
 							</td>

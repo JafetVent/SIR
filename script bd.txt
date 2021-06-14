@@ -50,6 +50,8 @@ CREATE TABLE facturas_Parte(
     FOREIGN KEY(idInvoice) REFERENCES factura(idInvoice) ON DELETE CASCADE,
     FOREIGN KEY(noParte) REFERENCES parte(noParte) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX factura_parte ON facturas_parte(idInvoice, noParte);
+
 INSERT INTO `facturas_Parte` (`idInvoice`, `noParte`) VALUES
 (123456,1),
 (789012,1),
@@ -109,6 +111,7 @@ CREATE TABLE inspecciones(
     FOREIGN KEY(idReporte) REFERENCES reporte(idReporte)
 );
 
+CREATE UNIQUE INDEX valoresInsp ON valoresInsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
 DELIMITER ;
 
 DELIMITER $$
@@ -118,17 +121,3 @@ BEGIN
   VALUES (new.idFacPar);
 END $$
 DELIMITER ;
-
-//solucion temporal para el duplicado de datos
-SELECT DISTINCT
-    idInvoice,noParte
-FROM
-    facturas_parte
-WHERE
-	idInvoice = 123456
-ORDER BY 
-    idInvoice, noParte;
-
-INSERT IGNORE INTO tabla values 
-
-SELECT DISTINCT idInvoice, noParte, estatus FROM facturas_parte JOIN reporte on reporte.idFacPar = facturas_parte.idFacPar WHERE facturas_parte.idInvoice = 789012

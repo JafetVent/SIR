@@ -91,11 +91,12 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null
                
                 <table class="table table-striped"  id="tabla">
                     <tr class="fila-fija">
-                        <td><input required name="caracteristicas" placeholder="Caracteristica"/></td>
-                        <td><input required name="especificacion" placeholder="Especificación"/></td>
-                        <td><input list="equipo" required name="equipo" placeholder="Equipo de Medición"/></td> 
-                        <td><input required name="toleranciamin" placeholder="Tolerencia Min"/></td> 
-                        <td><input required name="tolerenciamax" placeholder="Tolerancia Max"/></td>                 
+                        <td><input type="hidden" required name="noParte[]" placeholder="Factura" value="<?php echo $valor;?>"/></td>
+                        <td><input required name="caracteristicas[]" placeholder="Caracteristica"/></td>
+                        <td><input required name="especificacion[]" placeholder="Especificación"/></td>
+                        <td><input list="equipo" required name="equipo[]" placeholder="Equipo de Medición"/></td> 
+                        <td><input required name="toleranciamin[]" placeholder="Tolerencia Min"/></td> 
+                        <td><input required name="toleranciamax[]" placeholder="Tolerancia Max"/></td>                 
  <datalist id="equipo">
     
         <option value="Vernier">
@@ -103,7 +104,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null
         <option value="Visual">     
     
 </datalist>
-                    
+                    <td class="eliminar"><input type="button"  class="btn btn-outline-danger" value="Eliminar"/></td>
                     </tr>
                 </table>
 
@@ -115,47 +116,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null
             </form>
 
 
-<?php
-    # La lista de nombres; por defecto vacía
-    $nombres = [];
-    # Si hay nombres enviados por el formulario; entonces
-    # la lista es el formulario.
-    # Cada que lo envíen, se agrega un elemento a la lista
-    if (isset($_POST["nombres"])) {
-        $nombres = $_POST["nombres"];
-    }
-    # Detectar cuál botón fue presionado
-    # Más info: https://parzibyte.me/blog/2019/07/23/php-formulario-dos-botones/
-    # En caso de que haya sido el de guardar, no agregamos más campos
-    if (isset($_POST["guardar"])) {
-        # Quieren guardar; no quieren agregar campos
-        echo "OK se guarda lo siguiente:<br>";
-        print_r($nombres);
-        exit;
-    }
-    ?>
-
-
-    <form method="post" action="index.php">
-        <!--Comienza el ciclo que dibuja los campos dinámicos-->
-
-        <?php foreach ($nombres as $nombre) { ?>
-            <input value="<?php echo $nombre ?>" type="text" name="nombres[]">
-            <br><br>
-        <?php } ?>
-        <!--Termina el ciclo que dibuja los campos dinámicos-->
-
-        <!--Fuera de la lista tenemos siempre este campo, es el primero-->
-        <input autocomplete="off" autofocus value="" type="text" name="nombres[]">
-        <br><br>
-        <button name="agregar" type="submit">Agregar Parte</button>
-        <button class="btn btn-primary" name="guardar" type="submit">Guardar Factura</button>
-    </form>
-</form>
-
-</div>
-
-<script>
+            <script>
             
             $(function(){
                 // Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
@@ -170,8 +131,7 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null
                 });
             });
         </script>
-
-
+  
         <?php 
 
         /*=============================================
@@ -185,7 +145,8 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null
         FORMA EN QUE SE INSTANCIA LA CLASE DE UN MÉTODO ESTÁTICO 
         =============================================*/
 
-        $registro = ControladorFormularios::ctrRegistro();
+        $registro = ControladorFormularios::ctrRegistroC();
+
 
         if($registro == "ok"){
 
@@ -193,13 +154,13 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null
 
                 if ( window.history.replaceState ) {
 
-                    window.history.replaceState( null, null, window.location.href );
+                    window.history.replaceState( null, null, window.location.href);
 
                 }
 
             </script>';
 
-            echo '<div class="alert alert-success">El usuario ha sido registrado</div>';
+            echo '<div class="alert alert-success">Las caracteristicas han sido registradas</div>';
         
         }
 
