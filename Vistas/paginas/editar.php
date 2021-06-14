@@ -121,7 +121,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 
     /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO ESTATICO*/
         $registro = controladorFormularios::ctrRegistroFP();
-        //echo $registro;
+        
 
         if ($registro == "ok") {
 

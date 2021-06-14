@@ -255,6 +255,29 @@ static public function ctrRegistroC(){
 
 	}
 
+	/*Guardar Registro Reporte*/
+	public function ctrGuardarRegistroR(){
+		if(isset($_POST["guardarRegistro"])){
+
+			$tabla = "reporte";
+			$item = $_POST["idFacPar"];
+
+			$datos = array("fecha" => $_POST["registroFecha"],
+				           "fechafifo" => $_POST["registroFechafifo"],
+				           "noCaja" => $_POST["registrocaja"],
+				           "turno" => $_POST["turno"],
+				           "estatus" => $_POST["estatus"],
+				           "observacion" => $_POST["observacion"]);
+
+			$respuesta = ModeloFormularios::mdlGuardarRegistroR($tabla, $item, $datos);
+
+			return $respuesta;
+
+		}
+
+	}
+
+
 }
 
 

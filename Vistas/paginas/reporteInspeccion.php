@@ -13,7 +13,7 @@ border-radius: 3%;
 }
 </style>
 
-
+<form class="p-5 bg-light" method="post">
 
 <div class="container-fluid py-5">
 	<div class="row">
@@ -88,6 +88,12 @@ border-radius: 3%;
 							Tolerancia Max
 						</th>
 						<th>
+							IdReporte
+						</th>
+						<th>
+							IdFacPar
+						</th>
+						<th>
 							I1
 						</th>
 						<th>
@@ -104,6 +110,8 @@ border-radius: 3%;
 						</th>
 					</tr>
 				</thead>
+				<div>
+					<form class="p-5 bg-light" method="post">
 				<tbody id="myTable">
 					<?php foreach ($reporte as $key => $value): ?>
 					<tr>
@@ -125,45 +133,31 @@ border-radius: 3%;
 						<td>
 							<?php echo $value["toleranciamax"];?>
 						</td>
+						<form class="p-5 bg-light" method="post">
+						<td><input required name="idReporte[]" value="<?php echo $value["idReporte"];?>"/></td>
+						<td><input required name="idReporte[]" value="<?php echo $value["idFacPar"];?>"/></td>
 						<td>
-							<input type="text" name="inspeccion1" id="i1">
+							<input type="text" required name="i1[]" id="i1">
 						</td>
 						<td>
-							<input type="text" name="inspeccion2" id="i2">
+							<input type="text" required name="i2[]" id="i2">
 						</td>
 						<td>
-							<input type="text" name="inspeccion3" id="i3">
+							<input type="text" required name="i3[]" id="i3">
 						</td>
 						<td>
-							<input type="text" name="inspeccion4" id="i4">
+							<input type="text" required name="i4[]" id="i4">
 						</td>
 						<td>
-							<input type="text" name="inspeccion5" id="i5">
+							<input type="text" required name="i5[]" id="i5">
 						</td>
 						<td>
 							<div class="btn-group">
-								<form method="POST">
-									<input type="hidden" value="<?php echo $value["idReporte"]; ?>" name="guardarRegistro">
-									<button type="submit"class="btn btn-success"><i class="far fa-check-circle"></i></button>
-									<?php
-									        $registro = controladorFormularios::ctrGuardarRegistro();
-        //echo $registro;
-
-        if ($registro == "ok") {
-
-            echo '<script>
-
-                if(window.history.replaceState){
-                    window.history.replaceState(null, null, window.location.href);
-                }
-
-            </script>';
-
-            echo '<div class="alert alert-success">La partes han sido registradas</div>';
-        }
-									?>
-								</form>
-							</td>
+								
+									<input type="submit" name="guardarRegistro" class="btn btn-success"/>
+									</div>
+									</form>
+						</td>
 						</tr>
 						<?php endforeach?>
 					</tbody>
@@ -176,9 +170,9 @@ border-radius: 3%;
 						<input list="estatus" name="estatus">
 					</div>
 					<datalist id="estatus">
-					<option value="AA">
-						<option value="NA">
-							<option value="AO">
+					<option value="AA"></option>
+						<option value="NA"></option>
+							<option value="AO"></option>
 								</datalist>
 								<div class="form-group">
 									<label for="observacion"> Observaciones: </label>
@@ -187,6 +181,29 @@ border-radius: 3%;
 							</form>
 						</div>
 						<div class="d-flex justify-content-center h-100 d-inline-block p-2">
-							<input type="submit" name="insertar" value="Guardar" class="btn btn-success"/>
+							<input type="submit" name="guardarRegistro" class="btn btn-success"/>
 							<button id="adicional" name="adicional" type="button" class="btn btn-danger"> Cancelar </button>
 						</div>
+						
+			</form>
+
+		
+											<?php
+									        $registroI = controladorFormularios::ctrGuardarRegistro();
+									        $registroR = controladorFormularios::ctrGuardarRegistroR();
+        //echo $registro;
+
+        if ($registroI == "ok") {
+
+            echo '<script>
+
+                if(window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                }
+
+            </script>';
+
+            echo '<div class="alert alert-success">La partes han sido registradas</div>';
+        }
+									?>
+									
