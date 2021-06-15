@@ -109,7 +109,7 @@ CREATE TABLE inspecciones(
     PRIMARY KEY(idInspeccion),
     FOREIGN KEY(idReporte) REFERENCES reporte(idReporte)
 );
-CREATE UNIQUE INDEX inspecciones ON inspecciones(idReporte, i1, i2, i3, i4, i5);
+CREATE UNIQUE INDEX inspecciones ON inspecciones(idInspeccion, idReporte);
 
 CREATE UNIQUE INDEX valoresInsp ON valoresInsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
 DELIMITER ;

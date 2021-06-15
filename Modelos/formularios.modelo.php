@@ -73,7 +73,7 @@ class ModeloFormularios{
 
 	}
 
-	static public function mdlGuardarRegistroR($tabla, $datos, $item){
+	static public function mdlGuardarRegistroR($tabla, $datos, $item, $valor){
 
 		#statement: declaración
 
@@ -84,6 +84,7 @@ class ModeloFormularios{
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha = :fecha, fechafifo = :fechafifo, noCaja = :noCaja, turno = :turno, estatus = :estatus, observacion = :observacion WHERE $item = :$item");
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+
 		//$stmt->bindParam(":noTrabajador", $datos["noTrabajador"], PDO::PARAM_STR);	
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":fechafifo", $datos["fechafifo"], PDO::PARAM_STR);
@@ -91,6 +92,22 @@ class ModeloFormularios{
 		$stmt->bindParam(":turno", $datos["turno"], PDO::PARAM_STR);
 		$stmt->bindParam(":estatus", $datos["estatus"], PDO::PARAM_STR);
 		$stmt->bindParam(":observacion", $datos["observacion"], PDO::PARAM_STR);
+		$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+		$stmt1 = Conexion::conectar()->prepare("INSERT INTO inspecciones (idReporte,i1, i2, i3, i4, i5) VALUES (:idReporte, :i1, :i2, :i3, :i4, :i5)");
+
+		$arr_length = count($datos["idReporte"]);
+
+				for ($i = 0; $i < $arr_length ; $i++){	
+		$stmt1->bindParam(":idReporte", $datos["idReporte"][$i], PDO::PARAM_STR);	
+		$stmt1->bindParam(":i1", $datos["i1"][$i], PDO::PARAM_STR);
+		$stmt1->bindParam(":i2", $datos["i2"][$i], PDO::PARAM_STR);
+		$stmt1->bindParam(":i3", $datos["i3"][$i], PDO::PARAM_STR);
+		$stmt1->bindParam(":i4", $datos["i4"][$i], PDO::PARAM_STR);
+		$stmt1->bindParam(":i5", $datos["i5"][$i], PDO::PARAM_STR);
+		$stmt1->execute();
+
+		}
 
 		
 
@@ -104,8 +121,48 @@ class ModeloFormularios{
 
 		}
 
+		
 		$stmt->close();
+		$stmt = null;
 
+		$stmt1 = null;	
+
+	}
+
+
+		static public function mdlGuardarRegistro($tabla, $datos){
+
+		#statement: declaración
+
+		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idReporte,i1, i2, i3, i4, i5) VALUES (:idReporte, :i1, :i2, :i3, :i4, :i5)");
+
+		$arr_length = count($datos["idReporte"]);
+
+		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
+		for ($i = 0; $i < $arr_length ; $i++){	
+		$stmt->bindParam(":idReporte", $datos["idReporte"][$i], PDO::PARAM_STR);	
+		$stmt->bindParam(":i1", $datos["i1"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":i2", $datos["i2"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":i3", $datos["i3"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":i4", $datos["i4"][$i], PDO::PARAM_STR);
+		$stmt->bindParam(":i5", $datos["i5"][$i], PDO::PARAM_STR);
+		$stmt->execute();
+
+		}
+
+		
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			print_r(Conexion::conectar()->errorInfo());
+
+		}
 		$stmt = null;	
 
 	}
@@ -211,42 +268,7 @@ class ModeloFormularios{
 		 
 		
 		}
-	static public function mdlGuardarRegistro($tabla, $datos){
 
-		#statement: declaración
-
-		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
-
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idReporte,i1, i2, i3, i4, i5) VALUES (:idReporte, :i1, :i2, :i3, :i4, :i5)");
-
-		$arr_length = count($datos["idReporte"]);
-
-		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
-		for ($i = 0; $i < $arr_length ; $i++){	
-		$stmt->bindParam(":idReporte", $datos["idReporte"][$i], PDO::PARAM_STR);	
-		$stmt->bindParam(":i1", $datos["i1"][$i], PDO::PARAM_STR);
-		$stmt->bindParam(":i2", $datos["i2"][$i], PDO::PARAM_STR);
-		$stmt->bindParam(":i3", $datos["i3"][$i], PDO::PARAM_STR);
-		$stmt->bindParam(":i4", $datos["i4"][$i], PDO::PARAM_STR);
-		$stmt->bindParam(":i5", $datos["i5"][$i], PDO::PARAM_STR);
-		$stmt->execute();
-
-		}
-
-		
-
-		if($stmt->execute()){
-
-			return "ok";
-
-		}else{
-
-			print_r(Conexion::conectar()->errorInfo());
-
-		}
-		$stmt = null;	
-
-	}
 
 
 /*=============================================

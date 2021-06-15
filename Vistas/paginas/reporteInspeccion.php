@@ -13,8 +13,8 @@ border-radius: 3%;
 }
 </style>
 
-<form class="p-5 bg-light" method="post">
 
+<form method="post">
 <div class="container-fluid py-5">
 	<div class="row">
 		<div  style="background-color:white-space: ;">
@@ -27,8 +27,9 @@ border-radius: 3%;
 		</div>
 	</div>
 </div>
+
 <div class="container">
-	<form>
+	
 		<div class="form-group row">
 			<div class="col-xs-2">
 				<label for="fecha"> <b>Fecha:</b> </label>
@@ -47,24 +48,14 @@ border-radius: 3%;
 				<input class="form-control" list="turno" name="turno">
 			</div>
 		</div>
-	</form>
+	
 </div>
-<!-- <div class="container py-5">
-			<form class="form-inline" action="/action_page.php">
-						<label for="fecha"> Fecha: </label>
-		<input type="date" name="registroFecha" step="1" min="" max="" value="<?php echo date("Y-m-d");?>" id="fecha">
-		<label for="fechafifo"> FechaFifo</label>
-		<input type="date" name="registroFechafifo" step="1" min="" max="" value="<?php echo date("Y-m-d");?>" id="fechafifo">
-		<label for="noCaja"> No.caja: </label>
-		<input type="text" name="registrocaja" id="nocaja">
-		<label for="turno"> Turno: </label>
-		<input list="turno" name="turno">
-	</form>
-</div> -->
+
 <datalist id="turno">
-<option value="A">
+	<option value="A">
 	<option value="B">
-		</datalist>
+</datalist>
+
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -110,8 +101,7 @@ border-radius: 3%;
 						</th>
 					</tr>
 				</thead>
-				<div>
-					<form class="p-5 bg-light" method="post">
+					
 				<tbody id="myTable">
 					<?php foreach ($reporte as $key => $value): ?>
 					<tr>
@@ -132,10 +122,13 @@ border-radius: 3%;
 						</td>
 						<td>
 							<?php echo $value["toleranciamax"];?>
+						</td>																						
+						<td>
+							<input name="idReporte[]" value="<?php echo $value["idReporte"];?>"/>
 						</td>
-						<form class="p-5 bg-light" method="post">
-						<td><input required name="idReporte[]" value="<?php echo $value["idReporte"];?>"/></td>
-						<td><input required name="idReporte[]" value="<?php echo $value["idFacPar"];?>"/></td>
+						<td>
+							<input name="idFacPar" value="<?php echo $value["idFacPar"];?>"/>
+						</td>							
 						<td>
 							<input type="text" required name="i1[]" id="i1">
 						</td>
@@ -156,44 +149,51 @@ border-radius: 3%;
 								
 									<input type="submit" name="guardarRegistro" class="btn btn-success"/>
 									</div>
-									</form>
+						
 						</td>
 						</tr>
+						
 						<?php endforeach?>
 					</tbody>
 				</table>
 			</div>
+
+
 			<div class="container py-3">
-				<form class="form-inline" action="/action_page.php">
+				
 					<div class="form-group">
 						<label for="estatus"> Estatus: </label>
 						<input list="estatus" name="estatus">
 					</div>
+
 					<datalist id="estatus">
-					<option value="AA"></option>
+						<option value="AA"></option>
 						<option value="NA"></option>
-							<option value="AO"></option>
-								</datalist>
-								<div class="form-group">
-									<label for="observacion"> Observaciones: </label>
-									<input type="text" name="observacion" id="observacion">
-								</div>
-							</form>
-						</div>
-						<div class="d-flex justify-content-center h-100 d-inline-block p-2">
-							<input type="submit" name="guardarRegistro" class="btn btn-success"/>
-							<button id="adicional" name="adicional" type="button" class="btn btn-danger"> Cancelar </button>
-						</div>
-						
-			</form>
+						<option value="AO"></option>
+					</datalist>
+
+					<div class="form-group">
+						<label for="observacion"> Observaciones: </label>
+						<input type="text" name="observacion" id="observacion">
+					</div>					
+					
+			</div>
+
+			<div class="d-flex justify-content-center h-100 d-inline-block p-2">
+				<input type="submit" name="guardarRegistroR" class="btn btn-success"/>
+				<button id="adicional" name="adicional" type="button" class="btn btn-danger"> Cancelar </button>
+			</div>
+				
+		</form>	
+			
 
 		
-											<?php
-									        $registroI = controladorFormularios::ctrGuardarRegistro();
-									        $registroR = controladorFormularios::ctrGuardarRegistroR();
+		<?php
+		$registro = controladorFormularios::ctrGuardarRegistroR();
+		//$registro1 = controladorFormularios::ctrGuardarRegistro();
         //echo $registro;
 
-        if ($registroI == "ok") {
+        if ($registro == "ok" ) {
 
             echo '<script>
 
@@ -203,7 +203,7 @@ border-radius: 3%;
 
             </script>';
 
-            echo '<div class="alert alert-success">La partes han sido registradas</div>';
+            echo '<div class="alert alert-success">El reporte se ha guardado</div>';
         }
 									?>
 									

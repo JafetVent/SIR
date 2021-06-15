@@ -235,41 +235,48 @@ static public function ctrRegistroC(){
 	}
 
 /*Guardar Registro inspecciones*/
-	public function ctrGuardarRegistro(){
-		if(isset($_POST["guardarRegistro"])){
+	// public function ctrGuardarRegistro(){
+	// 	if(isset($_POST["guardarRegistro"])){
 
-			$tabla = "inspecciones";
+	// 		$tabla = "inspecciones";
 
-			$datos = array("idReporte" => $_POST["idReporte"],
-				           "i1" => $_POST["i1"],
-				           "i2" => $_POST["i2"],
-				           "i3" => $_POST["i3"],
-				           "i4" => $_POST["i4"],
-				           "i5" => $_POST["i5"]);
+	// 		$datos = array("idReporte" => $_POST["idReporte"],
+	// 			           "i1" => $_POST["i1"],
+	// 			           "i2" => $_POST["i2"],
+	// 			           "i3" => $_POST["i3"],
+	// 			           "i4" => $_POST["i4"],
+	// 			           "i5" => $_POST["i5"]);
 
-			$respuesta = ModeloFormularios::mdlGuardarRegistro($tabla, $datos);
+	// 		$respuesta = ModeloFormularios::mdlGuardarRegistro($tabla, $datos);
 
-			return $respuesta;
+	// 		return $respuesta;
 
-		}
+	// 	}
 
-	}
+	// }
 
 	/*Guardar Registro Reporte*/
 	public function ctrGuardarRegistroR(){
-		if(isset($_POST["guardarRegistro"])){
+		if(isset($_POST["guardarRegistroR"])){
 
 			$tabla = "reporte";
-			$item = $_POST["idFacPar"];
+			$item = "idFacPar";
+			$valor = $_POST["idFacPar"];
 
 			$datos = array("fecha" => $_POST["registroFecha"],
 				           "fechafifo" => $_POST["registroFechafifo"],
 				           "noCaja" => $_POST["registrocaja"],
 				           "turno" => $_POST["turno"],
 				           "estatus" => $_POST["estatus"],
-				           "observacion" => $_POST["observacion"]);
+				           "observacion" => $_POST["observacion"],
+				       	   "idReporte" => $_POST["idReporte"],
+				           "i1" => $_POST["i1"],
+				           "i2" => $_POST["i2"],
+				           "i3" => $_POST["i3"],
+				           "i4" => $_POST["i4"],
+				           "i5" => $_POST["i5"]);
 
-			$respuesta = ModeloFormularios::mdlGuardarRegistroR($tabla, $item, $datos);
+			$respuesta = ModeloFormularios::mdlGuardarRegistroR($tabla, $datos, $item, $valor);
 
 			return $respuesta;
 

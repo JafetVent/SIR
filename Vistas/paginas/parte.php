@@ -73,7 +73,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 <td>
                     <div class="btn-group">
                         <div class="px-1">
-                            <a href="index.php?pagina=valoresParte&id=<?php echo $value["noParte"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <a href="index.php?pagina=valoresParte&id=<?php echo $value["noParte"]; ?>"  class="btn btn-warning"><i class="fas fa-plus-circle"></i></a>
                         </div>
                         <form method="POST">
                             <input type="hidden" value="<?php echo $value["noParte"]; ?>" name="eliminarRegistro">
