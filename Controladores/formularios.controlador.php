@@ -14,6 +14,8 @@ class ControladorFormularios{
 				
 				$_SESSION["validarIngreso"]="ok";
 
+
+
 				echo '<script>
 
 				if(window.history.replaceState){
@@ -38,12 +40,13 @@ class ControladorFormularios{
 		}
 	}
 
+
 	/*SELECCIONAR REGISTROS*/
 
 	static public function ctrSeleccionarRegistrosFactura($item, $valor){
 
 		$tabla = "factura";
-		$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVF($tabla, $item, $valor);
 
 		return $respuesta;
 		
@@ -117,6 +120,33 @@ class ControladorFormularios{
 
 		$tabla = "reporte";
 		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosReporteInspeccion($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+	static public function ctrSeleccionarRegistrosVistaReporte($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVistaReporte($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+	static public function ctrSeleccionarRegistrosVistaReporteCaracteristicas($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVistaReporteCaracteristicas($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+	static public function ctrSeleccionarRegistrosVistaInspeccion($item, $valor){
+
+		$tabla = "reporte";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVistaInspeccion($tabla, $item, $valor);
 
 		return $respuesta;
 		

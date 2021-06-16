@@ -4,8 +4,7 @@ $item = "idInvoice";
 $valor = $_GET["id"];
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor);
 }
-$Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null);
-$Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
+
 
 
 
@@ -53,7 +52,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                         <td>
                             <div class="btn-group">
                                 <div class="px-1">
-                                    <a href="index.php?pagina=reporteInspeccion&id=<?php echo $value["noParte"]; ?>"  class="btn btn-warning"><i class="fas fa-search"></i></a>
+                                    <a href="index.php?pagina=vistaReporte&id=<?php echo $value["idFacPar"]; ?>"  class="btn btn-warning"><i class="fas fa-search"></i></a>
                                 </div>
                                 <form method="POST">
                                     <input type="hidden" value="<?php echo $value["idFacPar"]; ?>" name="eliminarRegistro">
@@ -137,3 +136,13 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
         }
 
     ?>
+<script>
+$(document).ready(function(){
+$("#myInput").on("keyup", function() {
+var value = $(this).val().toLowerCase();
+$("#myTable tr").filter(function() {
+$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+});
+});
+});
+</script>

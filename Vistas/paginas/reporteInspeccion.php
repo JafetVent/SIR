@@ -79,10 +79,10 @@ border-radius: 3%;
 							Tolerancia Max
 						</th>
 						<th>
-							IdReporte
+							
 						</th>
 						<th>
-							IdFacPar
+							
 						</th>
 						<th>
 							I1
@@ -124,10 +124,10 @@ border-radius: 3%;
 							<?php echo $value["toleranciamax"];?>
 						</td>																						
 						<td>
-							<input name="idReporte[]" value="<?php echo $value["idReporte"];?>"/>
+							<input type="hidden" name="idReporte[]" value="<?php echo $value["idReporte"];?>"/>
 						</td>
 						<td>
-							<input name="idFacPar" value="<?php echo $value["idFacPar"];?>"/>
+							<input type="hidden" name="idFacPar" value="<?php echo $value["idFacPar"];?>"/>
 						</td>							
 						<td>
 							<input type="text" required name="i1[]" id="i1">
@@ -143,13 +143,6 @@ border-radius: 3%;
 						</td>
 						<td>
 							<input type="text" required name="i5[]" id="i5">
-						</td>
-						<td>
-							<div class="btn-group">
-								
-									<input type="submit" name="guardarRegistro" class="btn btn-success"/>
-									</div>
-						
 						</td>
 						</tr>
 						

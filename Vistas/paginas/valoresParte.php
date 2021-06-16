@@ -6,7 +6,6 @@ $varPar = ControladorFormularios::ctrSeleccionarRegistrosReporteVarPar($item, $v
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte($item, $valor);
 
 }
-$Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null,null,null);
 
 ?>
 

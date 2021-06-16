@@ -280,7 +280,7 @@ class ModeloFormularios{
 	static public function mdlSeleccionarRegistros($tabla, $item, $valor){
 
 		if ($item == null && $valor == null) {
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+			$stmt = Conexion::conectar()->prepare("SELECT *  FROM $tabla");
 			$stmt -> execute();
 
 			return $stmt -> fetchALL();
@@ -298,6 +298,13 @@ class ModeloFormularios{
 
 		$stmt = null;
 				
+	}
+
+	static public function mdlSeleccionarRegistrosVF($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("SELECT *,DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha  FROM $tabla");
+			$stmt -> execute();
+
+			return $stmt -> fetchALL();
 	}
 
 	static public function mdlSeleccionarRegistrosV($tabla, $item, $valor){		
@@ -329,7 +336,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosR($tabla, $item, $valor){	
-			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT * FROM $tabla JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar");
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar");
 			$stmt -> execute();
 
 			return $stmt -> fetchALL();
@@ -357,6 +364,54 @@ class ModeloFormularios{
 			}
 			return $data;
 	}
+
+	static public function mdlSeleccionarRegistrosVistaReporte($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("	SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha, DATE_FORMAT(fechafifo, '%d/%m/%Y') AS fechafifo FROM $tabla JOIN usuario ON reporte.noTrabajador = usuario.noTrabajador
+													WHERE reporte.$item = :$item");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+
+			$data = array();
+			while ($row =  $stmt -> fetch(PDO::FETCH_ASSOC)) {
+				$data[] = $row;
+			}
+			return $data;
+	}
+
+	static public function mdlSeleccionarRegistrosVistaReporteCaracteristicas($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("	SELECT * FROM $tabla
+													JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar
+													JOIN parte ON facturas_parte.noParte = parte.noParte
+													JOIN valoresinsp ON parte.noParte = valoresinsp.noParte
+													WHERE facturas_parte.$item = :$item ");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+
+			$data = array();
+			while ($row =  $stmt -> fetch(PDO::FETCH_ASSOC)) {
+				$data[] = $row;
+			}
+			return $data;
+	}
+
+	static public function mdlSeleccionarRegistrosVistaInspeccion($tabla, $item, $valor){	
+			$stmt = Conexion::conectar()->prepare("	SELECT DISTINCT caracteristicas, especificacion, equipo, toleranciamin, toleranciamax, i1, i2, 									    i3, i4, i5 FROM $tabla
+													JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar
+													JOIN parte ON facturas_parte.noParte = parte.noParte
+													JOIN valoresinsp ON parte.noParte = valoresinsp.noParte
+													JOIN inspecciones on reporte.idReporte = inspecciones.idReporte
+													WHERE reporte.$item = :$item");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+
+			$data = array();
+			while ($row =  $stmt -> fetch(PDO::FETCH_ASSOC)) {
+				$data[] = $row;
+			}
+			return $data;
+	}
+
+
 
 static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){
 
