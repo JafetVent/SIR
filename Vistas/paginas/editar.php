@@ -4,10 +4,7 @@ $item = "idInvoice";
 $valor = $_GET["id"];
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteV($item, $valor);
 }
-
-
-
-
+$Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null,null,null);
 ?>
 <div class="container py-5">
 

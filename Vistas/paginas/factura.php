@@ -24,8 +24,6 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
         </div>
     </nav>
 
-    <?php echo "Nombre de usuario: " . $_SESSION["validarIngreso"];?>
-
     <table class="table table-striped">
         <thead>
             <tr>

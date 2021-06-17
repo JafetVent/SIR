@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,26 +19,8 @@
 
 </head>
 <body>
-<div id="demo" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="Imagenes/Login/1.jpg" alt="Los Angeles" width="1100" height="500">
-      <div class="carousel-caption">
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="Imagenes/Login/2.jpg" alt="Chicago" width="1100" height="500">
-      <div class="carousel-caption">
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="Imagenes/Login/3.jpg" alt="New York" width="1100" height="500">
-      <div class="carousel-caption">
-      </div>   
-    </div>
-  </div>
 
- <div class="card-img-overlay">
+    <div class="container py-5">
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-sm-4">
@@ -56,7 +39,8 @@
                         </div>
                         <input type="text" class="form-control" id="noTrabajador" name="ingresoUsuario">
                       </input>
-                    </div>
+     </div>             
+
 
 
                     <div class="form-group">

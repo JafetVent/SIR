@@ -7,8 +7,9 @@ if($_SESSION["validarIngreso"] != "ok"){
 echo '<script>window.location = "index.php?pagina=login";</script>';
 return;
 }
-
 }
+
+
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
 ?>
 <div class="container py-5">
@@ -35,9 +36,6 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                     Subproveedor
                 </th>
                 <th>
-                    Familia
-                </th>
-                <th>
                     Descripción
                 </th>
                 <th>
@@ -60,9 +58,6 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null, null, null);
                 </td>
                 <td>
                     <?php echo $value["subproveedor"];?>
-                </td>
-                <td>
-                    <?php echo $value["familia"];?>
                 </td>
                 <td>
                     <?php echo $value["descripcion"];?>

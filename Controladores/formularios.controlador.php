@@ -1,7 +1,9 @@
 <?php 
 class ControladorFormularios{
 
-	/*Inicio de sesion*/
+	/*=============================================
+				INICIO DE SESION
+	=============================================*/
 	public function ctrIngreso(){
 
 		if(isset($_POST["ingresoUsuario"])){
@@ -13,6 +15,7 @@ class ControladorFormularios{
 			if ($respuesta["noTrabajador"] == $_POST["ingresoUsuario"] && $respuesta["password"] == $_POST["ingresoPassword"]){
 				
 				$_SESSION["validarIngreso"]="ok";
+				$_SESSION['usuario']=$valor;
 
 
 
@@ -40,9 +43,9 @@ class ControladorFormularios{
 		}
 	}
 
-
-	/*SELECCIONAR REGISTROS*/
-
+	/*=============================================
+		SELECCION REGISTROS PARA VISTA FACTURA
+	=============================================*/
 	static public function ctrSeleccionarRegistrosFactura($item, $valor){
 
 		$tabla = "factura";
@@ -52,7 +55,9 @@ class ControladorFormularios{
 		
 	}
 	
-
+	/*=================================================
+	SELECCION REGISTROS PARA VISTA PARTE Y VALORESPARTE
+	=================================================*/
 	static public function ctrSeleccionarRegistrosParte($item, $valor){
 
 		$tabla = "parte";
@@ -62,6 +67,9 @@ class ControladorFormularios{
 		
 	}
 
+	/*========================================================================
+	SELECCION REGISTROS PARA VISTA DE PARTES(VISTAREPORTE, REPORTEINSPECCION)
+	========================================================================*/
 	static public function ctrSeleccionarRegistrosParteVista($item, $valor){
 
 		$tabla = "parte";
@@ -71,15 +79,9 @@ class ControladorFormularios{
 		
 	}
 
-	static public function ctrSeleccionarRegistrosReporte($item, $valor){
-
-		$tabla = "reporte";
-		$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
-
-		return $respuesta;
-		
-	}
-
+	/*===============================================
+		SELECCION REGISTROS PARA VISTA FACTURA-PARTES
+	===============================================*/
 	static public function ctrSeleccionarRegistrosReporteV($item, $valor){
 
 		$tabla = "facturas_parte";
@@ -89,6 +91,9 @@ class ControladorFormularios{
 		
 	}
 
+	/*===================================================
+	SELECCION REGISTROS PARA VISTA VALORES A INSPECCIONAR
+	===================================================*/
 	static public function ctrSeleccionarRegistrosReporteVarPar($item, $valor){
 
 		$tabla = "valoresinsp";
@@ -98,6 +103,9 @@ class ControladorFormularios{
 		
 	}
 
+	/*=============================================
+	  SELECCION REGISTROS PARA VISTA DE REPORTES
+	=============================================*/
 	static public function ctrSeleccionarRegistrosReporteR($item, $valor){
 
 		$tabla = "reporte";
@@ -107,15 +115,9 @@ class ControladorFormularios{
 		
 	}
 
-	static public function ctrSeleccionarRegistrosFacturaR($item, $valor){
-
-		$tabla = "factura";
-		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosF($tabla, $item, $valor);
-
-		return $respuesta;
-		
-	}
-
+	/*=================================================
+	SELECCION REGISTROS DE CARACTERISTICAS PARA REPORTE
+	=================================================*/
 	static public function ctrSeleccionarRegistrosReporteInspeccion($item, $valor){
 
 		$tabla = "reporte";
@@ -125,6 +127,9 @@ class ControladorFormularios{
 		
 	}
 
+	/*=============================================
+		SELECCION REGISTROS DE REPORTE PARA VISTA
+	=============================================*/
 	static public function ctrSeleccionarRegistrosVistaReporte($item, $valor){
 
 		$tabla = "reporte";
@@ -153,8 +158,8 @@ class ControladorFormularios{
 	}
 
 
-		/*=============================================
-	Registro
+	/*=============================================
+					REGISTRO DE PARTES
 	=============================================*/
 	static public function ctrRegistro(){
 		if(isset($_POST["registroParte"]) ){
@@ -181,6 +186,9 @@ class ControladorFormularios{
 	
 }
 
+	/*=============================================
+				REGISTRO DE FACTURAS
+	=============================================*/
 static public function ctrRegistroF(){
 		if(isset($_POST["registroFactura"]) ){
 			$dir_subida = 'Imagenes/Facturas/';
@@ -204,6 +212,9 @@ static public function ctrRegistroF(){
 	
 }
 
+	/*=============================================
+				REGISTRO FACTURAS-PARTE
+	=============================================*/
 static public function ctrRegistroFP(){
 
 	if(isset($_POST["insertar"])){
@@ -218,6 +229,10 @@ static public function ctrRegistroFP(){
 		return $respuesta;
 	}
 }
+
+	/*=============================================
+			REGISTRO DE CARACTERISTICAS
+	=============================================*/
 
 static public function ctrRegistroC(){
 
@@ -238,8 +253,42 @@ static public function ctrRegistroC(){
 	}
 }
 
+	/*=============================================
+				REGISTRO DE REPORTE
+	=============================================*/
+	public function ctrGuardarRegistroR(){
+		if(isset($_POST["guardarRegistroR"])){
 
-/*Eliminar registro*/
+			$tabla = "reporte";
+			$item = "idFacPar";
+			$valor = $_POST["idFacPar"];
+
+			$datos = array("noTrabajador" => $_POST["auditor"],
+						   "fecha" => $_POST["registroFecha"],
+				           "fechafifo" => $_POST["registroFechafifo"],
+				           "noCaja" => $_POST["registrocaja"],
+				           "turno" => $_POST["turno"],
+				           "estatus" => $_POST["estatus"],
+				           "observacion" => $_POST["observacion"],
+				       	   "idReporte" => $_POST["idReporte"],
+				           "i1" => $_POST["i1"],
+				           "i2" => $_POST["i2"],
+				           "i3" => $_POST["i3"],
+				           "i4" => $_POST["i4"],
+				           "i5" => $_POST["i5"]);
+
+			$respuesta = ModeloFormularios::mdlGuardarRegistroR($tabla, $datos, $item, $valor);
+
+			return $respuesta;
+
+		}
+
+	}
+
+
+	/*=============================================
+				ELIMINAR FACTURA-PARTE
+	=============================================*/
 	public function ctrEliminarRegistro(){
 		if (isset($_POST["eliminarRegistro"])) {
 
@@ -263,57 +312,6 @@ static public function ctrRegistroC(){
 			return $respuesta;
 		}
 	}
-
-/*Guardar Registro inspecciones*/
-	// public function ctrGuardarRegistro(){
-	// 	if(isset($_POST["guardarRegistro"])){
-
-	// 		$tabla = "inspecciones";
-
-	// 		$datos = array("idReporte" => $_POST["idReporte"],
-	// 			           "i1" => $_POST["i1"],
-	// 			           "i2" => $_POST["i2"],
-	// 			           "i3" => $_POST["i3"],
-	// 			           "i4" => $_POST["i4"],
-	// 			           "i5" => $_POST["i5"]);
-
-	// 		$respuesta = ModeloFormularios::mdlGuardarRegistro($tabla, $datos);
-
-	// 		return $respuesta;
-
-	// 	}
-
-	// }
-
-	/*Guardar Registro Reporte*/
-	public function ctrGuardarRegistroR(){
-		if(isset($_POST["guardarRegistroR"])){
-
-			$tabla = "reporte";
-			$item = "idFacPar";
-			$valor = $_POST["idFacPar"];
-
-			$datos = array("fecha" => $_POST["registroFecha"],
-				           "fechafifo" => $_POST["registroFechafifo"],
-				           "noCaja" => $_POST["registrocaja"],
-				           "turno" => $_POST["turno"],
-				           "estatus" => $_POST["estatus"],
-				           "observacion" => $_POST["observacion"],
-				       	   "idReporte" => $_POST["idReporte"],
-				           "i1" => $_POST["i1"],
-				           "i2" => $_POST["i2"],
-				           "i3" => $_POST["i3"],
-				           "i4" => $_POST["i4"],
-				           "i5" => $_POST["i5"]);
-
-			$respuesta = ModeloFormularios::mdlGuardarRegistroR($tabla, $datos, $item, $valor);
-
-			return $respuesta;
-
-		}
-
-	}
-
 
 }
 

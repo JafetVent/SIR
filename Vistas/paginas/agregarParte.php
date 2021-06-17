@@ -47,21 +47,6 @@
 </div>
 </div>
 
-<!--Campo Familia-->
-<div class="form-group">
-    <label for="familia">
-      Familia:
-  </label>
-
-  <div class="input-group">
-    <div class="input-group-prepend">
-        <span class="input-group-text"><i class="fas fa-car"></i></i></span>
-    </div>
-    <input type="text" class="form-control" id="familia" name="registroFamilia">
-</input>
-</div>
-</div>
-
 <!--Campo Descripción-->
 <div class="form-group">
     <label for="descripcion">

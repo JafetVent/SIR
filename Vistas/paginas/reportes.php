@@ -6,6 +6,8 @@ return;
 if($_SESSION["validarIngreso"] != "ok"){
 echo '<script>window.location = "index.php?pagina=login";</script>';
 return;
+
+
 }
 
 }
@@ -62,15 +64,19 @@ $Reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteR(null,null,nul
                         <?php echo $value["fecha"];?>
                     </td>
                     <td>
-                        <div class="btn-group">
+                        <?php if ($value["estatus"] != "AA" && $value["estatus"] != "AO" && $value["estatus"] != "NA"): ?>
+                            <div class="btn-group">
                             <div class="px-1">
                                  <a href="index.php?pagina=reporteInspeccion&id=<?php echo $value["idFacPar"]; ?>"  class="btn btn-warning"><i class="far fa-edit"></i></a>
-                            </div>
-                                                        
+                            </div>                                                        
                         </div>
+                        <?php endif ?>
+                        
                     </td>
                 </tr>
                 <?php endforeach?>
+               
+                            
             </tbody>
         </table>
     </div>

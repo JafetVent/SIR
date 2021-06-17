@@ -33,7 +33,7 @@ class ModeloFormularios{
 
 		}else{
 
-			print_r(Conexion::conectar()->errorInfo());
+			//print_r(Conexion::conectar()->errorInfo());
 
 		}
 
@@ -63,7 +63,7 @@ class ModeloFormularios{
 
 		}else{
 
-			print_r(Conexion::conectar()->errorInfo());
+			//print_r(Conexion::conectar()->errorInfo());
 
 		}
 
@@ -81,11 +81,11 @@ class ModeloFormularios{
 
 
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha = :fecha, fechafifo = :fechafifo, noCaja = :noCaja, turno = :turno, estatus = :estatus, observacion = :observacion WHERE $item = :$item");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET noTrabajador = :noTrabajador, fecha = :fecha, fechafifo = :fechafifo, noCaja = :noCaja, turno = :turno, estatus = :estatus, observacion = :observacion WHERE $item = :$item");
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 
-		//$stmt->bindParam(":noTrabajador", $datos["noTrabajador"], PDO::PARAM_STR);	
+		$stmt->bindParam(":noTrabajador", $datos["noTrabajador"], PDO::PARAM_STR);	
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":fechafifo", $datos["fechafifo"], PDO::PARAM_STR);
 		$stmt->bindParam(":noCaja", $datos["noCaja"], PDO::PARAM_STR);
@@ -117,7 +117,7 @@ class ModeloFormularios{
 
 		}else{
 
-			print_r(Conexion::conectar()->errorInfo());
+			//print_r(Conexion::conectar()->errorInfo());
 
 		}
 
@@ -160,7 +160,7 @@ class ModeloFormularios{
 
 		}else{
 
-			print_r(Conexion::conectar()->errorInfo());
+			//print_r(Conexion::conectar()->errorInfo());
 
 		}
 		$stmt = null;	
@@ -207,9 +207,10 @@ class ModeloFormularios{
 
 		 }else{
 
-		 	print_r(Conexion::conectar()->errorInfo());
+		 	//print_r(Conexion::conectar()->errorInfo());
 
 		 }
+		 
 		  $stmt = null;
 		 
 		
@@ -261,9 +262,10 @@ class ModeloFormularios{
 
 		 }else{
 
-		 	print_r(Conexion::conectar()->errorInfo());
+		 	//print_r(Conexion::conectar()->errorInfo());
 
 		 }
+
 		  $stmt = null;
 		 
 		

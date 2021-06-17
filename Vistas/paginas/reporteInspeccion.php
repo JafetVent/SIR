@@ -5,6 +5,8 @@ $valor = $_GET["id"];
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParteVista($item, $valor);
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteInspeccion($item, $valor);
 }
+
+echo $_SESSION['usuario'];
 ?>
 <style type="text/css">
 	
@@ -46,6 +48,10 @@ border-radius: 3%;
 			<div class="col-xs-2">
 				<label for="turno"> <b>Turno:</b> </label>
 				<input class="form-control" list="turno" name="turno">
+			</div>
+			<div class="col-xs-2">
+				<label for="auditor"> <b>Auditor:</b> </label>
+				<input class="form-control" list="auditor" name="auditor" value="<?php echo $_SESSION['usuario'];?>">
 			</div>
 		</div>
 	

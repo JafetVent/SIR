@@ -92,8 +92,7 @@ border-radius: 3%;
 				</th>
 				<th>
 					Tolerancia Max
-				</th>
-				
+				</th>				
 				<th>
 					I1
 				</th>
