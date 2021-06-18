@@ -121,7 +121,7 @@ class ModeloFormularios{
 		}
 
 		
-		$stmt->close();
+		//$stmt->close();
 		$stmt = null;
 
 		$stmt1 = null;	

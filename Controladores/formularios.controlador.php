@@ -6,7 +6,9 @@ class ControladorFormularios{
 	=============================================*/
 	public function ctrIngreso(){
 
+
 		if(isset($_POST["ingresoUsuario"])){
+
 
 			$tabla = "usuario";
 			$item = "userName";
@@ -15,7 +17,7 @@ class ControladorFormularios{
 			if ($respuesta["userName"] == $_POST["ingresoUsuario"] && $respuesta["password"] == $_POST["ingresoPassword"]){
 				
 				$_SESSION["validarIngreso"]="ok";
-				$_SESSION['usuario']=$valor;
+				$_SESSION['usuario']=$respuesta["noTrabajador"];
 
 
 
@@ -50,6 +52,18 @@ class ControladorFormularios{
 
 		$tabla = "factura";
 		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVF($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
+	/*=============================================
+		SELECCION REGISTROS PARA VISTA FACTURA
+	=============================================*/
+	static public function ctrSeleccionarRegistrosUsuario($item, $valor){
+
+		$tabla = "usuario";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
 
 		return $respuesta;
 		

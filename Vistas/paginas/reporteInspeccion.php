@@ -5,8 +5,6 @@ $valor = $_GET["id"];
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParteVista($item, $valor);
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosReporteInspeccion($item, $valor);
 }
-
-echo $_SESSION['usuario'];
 ?>
 <style type="text/css">
 	
