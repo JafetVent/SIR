@@ -8,7 +8,7 @@ CREATE TABLE usuario(
     PRIMARY KEY(noTrabajador)
 ); 
 
-INSERT INTO `usuario` (`noTrabajador`, `nombre`, `apellido`, `rol`, `ruta_firma`, `password`) VALUES
+INSERT INTO `usuario` (`noTrabajador`, 'userName',`nombre`, `apellido`, `rol`,`password`) VALUES
 (1, 'jventura', 'Jafet','Ventura', 'admin', '1234'),
 (2, 'egarcia', 'Eduardo', 'García', 'Auditor', '12345'),
 (3, 'pmarquez', 'Pedro', 'Marquez', 'Consultor', '12345');
@@ -30,7 +30,7 @@ CREATE TABLE factura(
 ); 
 
 
-CREATE TABLE facturas_Parte(
+CREATE TABLE facturas_parte(
     idFacPar INT NOT NULL AUTO_INCREMENT,
     idInvoice INT NOT NULL,
     noParte VARCHAR(20) NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE facturas_Parte(
     FOREIGN KEY(idInvoice) REFERENCES factura(idInvoice) ON DELETE CASCADE,
     FOREIGN KEY(noParte) REFERENCES parte(noParte) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX factura_parte ON facturas_Parte(idInvoice, noParte);
+CREATE UNIQUE INDEX factura_partes ON facturas_parte(idInvoice, noParte);
 
 
-CREATE TABLE valoresInsp(
+CREATE TABLE valoresinsp(
     idValor INT NOT NULL AUTO_INCREMENT,
     noParte VARCHAR(20) NOT NULL,
     caracteristicas VARCHAR(80) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE valoresInsp(
     PRIMARY KEY(idValor),
     FOREIGN KEY(noParte) REFERENCES parte(noParte)
 );
-CREATE UNIQUE INDEX valoresinsp ON valoresInsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
+CREATE UNIQUE INDEX valoresinspc ON valoresinsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
 
 CREATE TABLE reporte(
     idReporte INT NOT NULL AUTO_INCREMENT,
@@ -80,9 +80,9 @@ CREATE TABLE inspecciones(
     PRIMARY KEY(idInspeccion),
     FOREIGN KEY(idReporte) REFERENCES reporte(idReporte)
 );
-CREATE UNIQUE INDEX inspecciones ON inspecciones(idInspeccion, idReporte);
+CREATE UNIQUE INDEX inspeccion ON inspecciones(idInspeccion, idReporte);
 
-CREATE UNIQUE INDEX valoresInsp ON valoresInsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
+
 DELIMITER ;
 
 DELIMITER $$
