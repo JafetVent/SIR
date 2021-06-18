@@ -14,13 +14,12 @@ class ModeloFormularios{
 
 		#prepare() Prepara una sentencia SQL para ser ejecutada por el método PDOStatement::execute(). La sentencia SQL puede contener cero o más marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada. Ayuda a prevenir inyecciones SQL eliminando la necesidad de entrecomillar manualmente los parámetros.
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(noParte,proveedor,subproveedor,familia,descripcion, ruta_imagen) VALUES (:noParte, :proveedor,:subproveedor,:familia,:descripcion,:ruta_imagen)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(noParte,proveedor,subproveedor,descripcion, ruta_imagen) VALUES (:noParte, :proveedor,:subproveedor,:descripcion,:ruta_imagen)");
 
 		#bindParam() Vincula una variable de PHP a un parámetro de sustitución con nombre o de signo de interrogación correspondiente de la sentencia SQL que fue usada para preparar la sentencia.
 		$stmt->bindParam(":noParte", $datos["noParte"], PDO::PARAM_STR);	
 		$stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
 		$stmt->bindParam(":subproveedor", $datos["subproveedor"], PDO::PARAM_STR);
-		$stmt->bindParam(":familia", $datos["familia"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
 		$stmt->bindParam(":ruta_imagen", $datos["ruta_imagen"], PDO::PARAM_STR);
 		
@@ -339,13 +338,6 @@ class ModeloFormularios{
 
 	static public function mdlSeleccionarRegistrosR($tabla, $item, $valor){	
 			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar");
-			$stmt -> execute();
-
-			return $stmt -> fetchALL();
-	}
-
-	static public function mdlSeleccionarRegistrosF($tabla, $item, $valor){	
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN reporte on factura.idFactura = reporte.idFactura");
 			$stmt -> execute();
 
 			return $stmt -> fetchALL();

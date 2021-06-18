@@ -1,30 +1,26 @@
 CREATE TABLE usuario(
     noTrabajador INT NOT NULL,
+    userName VARCHAR(20),
     nombre VARCHAR(20),
     apellido VARCHAR(20),
     rol VARCHAR(10),
     password VARCHAR(25),
-    ruta_firma VARCHAR(100),
     PRIMARY KEY(noTrabajador)
 ); 
 
 INSERT INTO `usuario` (`noTrabajador`, `nombre`, `apellido`, `rol`, `ruta_firma`, `password`) VALUES
-(1, 'Jafet', 'Ventura', 'admin', '', '1234');
+(1, 'jventura', 'Jafet','Ventura', 'admin', '1234'),
+(2, 'egarcia', 'Eduardo', 'García', 'Auditor', '12345'),
+(3, 'pmarquez', 'Pedro', 'Marquez', 'Consultor', '12345');
 
 CREATE TABLE parte(
     noParte VARCHAR(20) NOT NULL UNIQUE,
     proveedor VARCHAR(25) NOT NULL,
     subproveedor VARCHAR(25),
-    familia VARCHAR(25) NOT NULL,
     descripcion VARCHAR(80) NOT NULL,
     ruta_imagen VARCHAR(100) NOT NULL,
     PRIMARY KEY(noParte)
 );
-
-INSERT INTO `parte` (`noParte`, `proveedor`, `subproveedor`, `familia`, `descripcion`, `ruta_imagen`) VALUES
-('1', 'Pass Germany', 'NA', 'VW', 'tubo negro chido', ''),
-('2', 'Pass Germany', 'NA', 'Ford', 'tubo blanco no chido', '');
-
 
 CREATE TABLE factura(
     idInvoice INT NOT NULL,
@@ -32,14 +28,6 @@ CREATE TABLE factura(
     fecha DATE,
     PRIMARY KEY(idInvoice)
 ); 
-
-
-INSERT INTO `factura` (`idInvoice`, `ruta_factura`, `fecha`) VALUES
-(123456, '1', '0000-00-00'),
-(789012, '1', '0000-00-00'),
-(345678, '1', '0000-00-00'),
-(901234, '1', '0000-00-00'),
-(567890, '1', '0000-00-00');
 
 
 CREATE TABLE facturas_Parte(
@@ -50,19 +38,7 @@ CREATE TABLE facturas_Parte(
     FOREIGN KEY(idInvoice) REFERENCES factura(idInvoice) ON DELETE CASCADE,
     FOREIGN KEY(noParte) REFERENCES parte(noParte) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX factura_parte ON facturas_parte(idInvoice, noParte);
-
-INSERT INTO `facturas_Parte` (`idInvoice`, `noParte`) VALUES
-(123456,1),
-(789012,1),
-(345678,1),
-(901234,2),
-(567890,2),
-(123456,2),
-(789012,2),
-(345678,2),
-(901234,1),
-(567890,1);
+CREATE UNIQUE INDEX factura_parte ON facturas_Parte(idInvoice, noParte);
 
 
 CREATE TABLE valoresInsp(
@@ -76,12 +52,7 @@ CREATE TABLE valoresInsp(
     PRIMARY KEY(idValor),
     FOREIGN KEY(noParte) REFERENCES parte(noParte)
 );
-INSERT INTO `valoresinsp` (`idValor`, `noParte`, `caracteristicas`, `especificacion`, `equipo`, `toleranciamin`, `toleranciamax`) VALUES
-(1, '1', 'carac1', 'espec1', 'equipo1', 'min', 'max'),
-(2, '1', 'carac2', 'espec2', 'equipo2', 'min', 'max'),
-(3, '2', 'carac3', 'espec3', 'equipo3', 'min', 'max'),
-(4, '2', 'carac4', 'espec4', 'equipo4', 'min', 'max');
-
+CREATE UNIQUE INDEX valoresinsp ON valoresInsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
 
 CREATE TABLE reporte(
     idReporte INT NOT NULL AUTO_INCREMENT,

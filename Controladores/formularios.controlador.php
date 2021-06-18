@@ -9,10 +9,10 @@ class ControladorFormularios{
 		if(isset($_POST["ingresoUsuario"])){
 
 			$tabla = "usuario";
-			$item = "noTrabajador";
+			$item = "userName";
 			$valor = $_POST["ingresoUsuario"];
 			$respuesta = ModeloFormularios::mdlSeleccionarRegistros($tabla, $item, $valor);
-			if ($respuesta["noTrabajador"] == $_POST["ingresoUsuario"] && $respuesta["password"] == $_POST["ingresoPassword"]){
+			if ($respuesta["userName"] == $_POST["ingresoUsuario"] && $respuesta["password"] == $_POST["ingresoPassword"]){
 				
 				$_SESSION["validarIngreso"]="ok";
 				$_SESSION['usuario']=$valor;
@@ -172,7 +172,6 @@ class ControladorFormularios{
 				"noParte" => $_POST["registroParte"],
 				"proveedor" => $_POST["registroProveedor"],
 				"subproveedor" => $_POST["registroSubProveedor"],
-				"familia" => $_POST["registroFamilia"],
 				"descripcion" => $_POST["registroDescripcion"],
 				"ruta_imagen" => $fichero_subido
 				 );
