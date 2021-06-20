@@ -79,6 +79,29 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
     </table>
 </div>
 
+ <?php
+    /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO NO ESTATICO*/
+       // $registro = new controladorFormularios();
+       // $registro -> ctrRegistro();
+
+    /*FORMA QUE SE INSTANCIA LA CLASE DE UN METODO ESTATICO*/
+        $registro = controladorFormularios::ctrRegistro();
+        //echo $registro;
+
+        if ($registro == "ok") {
+
+            echo '<script>
+
+                if(window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                }
+
+            </script>';
+
+            echo '<div class="alert alert-success">La factura ha sido registrada, favor de recargar la página</div>';
+        }
+
+    ?>
 
 
 

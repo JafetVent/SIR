@@ -129,7 +129,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null,null,null);
 
             </script>';
 
-            echo '<div class="alert alert-success">La partes han sido registradas</div>';
+            echo '<div class="alert alert-success">Los no.Parte se han registrado, favor de recargar la página</div>';
         }
 
     ?>

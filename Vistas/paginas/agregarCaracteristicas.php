@@ -41,7 +41,7 @@
 		FORMA EN QUE SE INSTANCIA LA CLASE DE UN MÉTODO ESTÁTICO 
 		=============================================*/
 
-		$registro = ControladorFormularios::ctrRegistro();
+		$registro = ControladorFormularios::ctrRegistroC();
 
 		if($registro == "ok"){
 
@@ -55,7 +55,7 @@
 
 			</script>';
 
-			echo '<div class="alert alert-success">El usuario ha sido registrado</div>';
+			echo '<div class="alert alert-success">Las caracteristicas se han registrado, favor de recargar la página</div>';
 		
 		}
 
