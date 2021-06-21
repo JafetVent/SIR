@@ -64,10 +64,10 @@ $Factura = ControladorFormularios::ctrSeleccionarRegistrosFactura(null, null, nu
                         
                         <form method="POST">
                             <input type="hidden" value="<?php echo $value["idInvoice"]; ?>" name="eliminarRegistro">
-                            <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            <button type="submit" onclick="return confirm('¿Estas seguro de querer eliminar?');" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             <?php
                             $eliminar = new ControladorFormularios();
-                            $eliminar -> ctrEliminarRegistro();
+                            $eliminar -> ctrEliminarRegistroF();
                             ?>
                         </form>
                         

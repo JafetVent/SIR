@@ -69,11 +69,11 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte($item, $valor);
                         </td>
                         <td>
                                 <form method="POST">
-                                    <input type="hidden" value="<?php echo $value["noParte"]; ?>" name="guardarRegistro">
-                                    <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    <input type="hidden" value="<?php echo $value["idValor"]; ?>" name="eliminarRegistro">
+                                    <button type="submit"class="btn btn-danger" onclick="return confirm('¿Estas seguro de querer eliminar?');"><i class="fas fa-trash-alt"></i></button>
                                     <?php
                                     $eliminar = new ControladorFormularios();
-                                    $eliminar -> ctrEliminarRegistro();
+                                    $eliminar -> ctrEliminarRegistroV();
                                     ?>
                                 </form>
                                 
@@ -146,21 +146,21 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte($item, $valor);
 
         $registro = ControladorFormularios::ctrRegistroC();
 
-
         if($registro == "ok"){
 
             echo '<script>
 
                 if ( window.history.replaceState ) {
 
-                    window.history.replaceState( null, null, window.location.href);
+                    window.history.replaceState( null, null, window.location.href );
 
                 }
 
             </script>';
 
-            echo '<div class="alert alert-success">Las caracteristicas han sido registradas</div>';
+            echo '<div class="alert alert-success">Las caracteristicas se han registrado, favor de recargar la página</div>';
         
         }
 
         ?>
+        

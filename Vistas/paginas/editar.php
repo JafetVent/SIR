@@ -53,7 +53,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null,null,null);
                                 </div>
                                 <form method="POST">
                                     <input type="hidden" value="<?php echo $value["idFacPar"]; ?>" name="eliminarRegistro">
-                                    <button type="submit"class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    <button type="submit" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button>
                                     <?php
                                     $eliminar = new ControladorFormularios();
                                     $eliminar -> ctrEliminarRegistro();
@@ -86,7 +86,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null,null,null);
                 </table>
 
                 <div class="btn-der">
-                    <input  type="submit" name="insertar" value="Guardar No. Partes" class="btn btn-primary"/>
+                    <input  href="index.php?pagina=editar&id=<?php echo $Parte["idInvoice"]; ?>" type="submit" name="insertar" value="Guardar No. Partes" class="btn btn-primary"/>
                     <button id="adicional" name="adicional" type="button" class="btn btn-success"> Agregar No.Partes </button>
 
                 </div>

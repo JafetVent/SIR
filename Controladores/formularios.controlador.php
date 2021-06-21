@@ -18,6 +18,7 @@ class ControladorFormularios{
 				
 				$_SESSION["validarIngreso"]="ok";
 				$_SESSION['usuario']=$respuesta["noTrabajador"];
+				$_SESSION['rol']=$respuesta["rol"];
 
 
 
@@ -317,7 +318,89 @@ static public function ctrRegistroC(){
 					window.history.replaceState(null, null, window.location.href);
 				}
 
-				window.location = "index.php?pagina=pagina=reporteInspeccion&id=<?php echo $value["idInvoice"]; ?>";
+				window.location = "index.php?pagina=reporteInspeccion&id=<?php echo $value["idInvoice"]; ?>";
+
+				</script>';
+			}
+
+			return $respuesta;
+		}
+	}
+
+	/*=============================================
+				ELIMINAR PARTE
+	=============================================*/
+	public function ctrEliminarRegistroP(){
+		if (isset($_POST["eliminarRegistro"])) {
+
+			$tabla = "parte";
+			$valor = $_POST["eliminarRegistro"];
+
+			$respuesta = ModeloFormularios::mdlEliminarRegistroP($tabla, $valor);
+
+			if ($respuesta=="ok") {
+				echo '<script>
+
+				if(window.history.replaceState){
+					window.history.replaceState(null, null, window.location.href);
+				}
+
+				window.location = "index.php?pagina=parte";
+
+				</script>';
+			}
+
+			return $respuesta;
+		}
+	}
+
+
+	/*=============================================
+				ELIMINAR VALORES
+	=============================================*/
+	public function ctrEliminarRegistroV(){
+		if (isset($_POST["eliminarRegistro"])) {
+
+			$tabla = "valoresinsp";
+			$valor = $_POST["eliminarRegistro"];
+
+			$respuesta = ModeloFormularios::mdlEliminarRegistroV($tabla, $valor);
+
+			if ($respuesta=="ok") {
+				echo '<script>
+
+				if(window.history.replaceState){
+					window.history.replaceState(null, null, window.location.href);
+				}
+
+				window.location = "index.php?pagina=reporteInspeccion&id=<?php echo $value["idInvoice"]; ?>";
+
+				</script>';
+			}
+
+			return $respuesta;
+		}
+	}
+
+		/*=============================================
+				ELIMINAR VALORES
+	=============================================*/
+	public function ctrEliminarRegistroF(){
+		if (isset($_POST["eliminarRegistro"])) {
+
+			$tabla = "factura";
+			$valor = $_POST["eliminarRegistro"];
+
+			$respuesta = ModeloFormularios::mdlEliminarRegistroF($tabla, $valor);
+
+			if ($respuesta=="ok") {
+				echo '<script>
+
+				if(window.history.replaceState){
+					window.history.replaceState(null, null, window.location.href);
+				}
+
+				window.location = "index.php?pagina=factura";
 
 				</script>';
 			}

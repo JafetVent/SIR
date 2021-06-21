@@ -48,8 +48,7 @@ border-radius: 3%;
 				<input class="form-control" list="turno" name="turno">
 			</div>
 			<div class="col-xs-2">
-				<label for="auditor"> <b>Auditor:</b> </label>
-				<input class="form-control" list="auditor" name="auditor" value="<?php echo $_SESSION['usuario'];?>">
+				<input type="hidden" class="form-control" list="auditor" name="auditor" value="<?php echo $_SESSION['usuario'];?>">
 			</div>
 		</div>
 	
@@ -178,7 +177,7 @@ border-radius: 3%;
 
 			<div class="d-flex justify-content-center h-100 d-inline-block p-2">
 				<input type="submit" name="guardarRegistroR" class="btn btn-success"/>
-				<button id="adicional" name="adicional" type="button" class="btn btn-danger"> Cancelar </button>
+				<button type="button" class="btn btn-danger" onclick="location.href='index.php?pagina=reportes';"> Cancelar </button>
 			</div>
 				
 		</form>	

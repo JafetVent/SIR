@@ -5,10 +5,10 @@ CREATE TABLE usuario(
     apellido VARCHAR(20),
     rol VARCHAR(10),
     password VARCHAR(25),
-    PRIMARY KEY(noTrabajador)
+    PRIMARY KEY(noTrabajador) 
 ); 
 
-INSERT INTO `usuario` (`noTrabajador`, 'userName',`nombre`, `apellido`, `rol`,`password`) VALUES
+INSERT INTO `usuario` (`noTrabajador`, `userName`,`nombre`, `apellido`, `rol`,`password`) VALUES
 (1, 'jventura', 'Jafet','Ventura', 'admin', '1234'),
 (2, 'egarcia', 'Eduardo', 'García', 'Auditor', '12345'),
 (3, 'pmarquez', 'Pedro', 'Marquez', 'Consultor', '12345');
@@ -19,14 +19,14 @@ CREATE TABLE parte(
     subproveedor VARCHAR(25),
     descripcion VARCHAR(80) NOT NULL,
     ruta_imagen VARCHAR(100) NOT NULL,
-    PRIMARY KEY(noParte)
+    PRIMARY KEY(noParte) ON DELETE CASCADE
 );
 
 CREATE TABLE factura(
     idInvoice INT NOT NULL,
     ruta_factura VARCHAR(100),
     fecha DATE,
-    PRIMARY KEY(idInvoice)
+    PRIMARY KEY(idInvoice) ON DELETE CASCADE
 ); 
 
 
@@ -49,7 +49,7 @@ CREATE TABLE valoresinsp(
     equipo VARCHAR(80) NOT NULL,
     toleranciamin VARCHAR(5) NOT NULL,
     toleranciamax VARCHAR(5) NOT NULL,
-    PRIMARY KEY(idValor),
+    PRIMARY KEY(idValor) ON DELETE CASCADE,
     FOREIGN KEY(noParte) REFERENCES parte(noParte)
 );
 CREATE UNIQUE INDEX valoresinspc ON valoresinsp(noParte, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax);
@@ -64,7 +64,7 @@ CREATE TABLE reporte(
     turno VARCHAR(1),
     estatus VARCHAR(2),
     observacion VARCHAR(60),
-    PRIMARY KEY(idReporte),
+    PRIMARY KEY(idReporte) ON DELETE CASCADE,
     FOREIGN KEY(idFacPar) REFERENCES facturas_parte(idFacPar) ON DELETE CASCADE,
     FOREIGN KEY(noTrabajador) REFERENCES usuario(noTrabajador)
 );
@@ -77,7 +77,7 @@ CREATE TABLE inspecciones(
     i3 VARCHAR(80) NOT NULL,
     i4 VARCHAR(80) NOT NULL,
     i5 VARCHAR(80) NOT NULL,
-    PRIMARY KEY(idInspeccion),
+    PRIMARY KEY(idInspeccion) ON DELETE CASCADE,
     FOREIGN KEY(idReporte) REFERENCES reporte(idReporte)
 );
 CREATE UNIQUE INDEX inspeccion ON inspecciones(idInspeccion, idReporte);

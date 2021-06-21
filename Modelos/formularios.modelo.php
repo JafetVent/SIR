@@ -324,7 +324,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosVarPar($tabla, $item, $valor){		
-			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT caracteristicas, especificacion, equipo, toleranciamin, toleranciamax FROM $tabla JOIN parte on parte.noParte = valoresinsp.noParte WHERE valoresinsp.$item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT DISTINCT idValor, caracteristicas, especificacion, equipo, toleranciamin, toleranciamax FROM $tabla JOIN parte on parte.noParte = valoresinsp.noParte WHERE valoresinsp.$item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 
@@ -434,7 +434,7 @@ static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){
 
 
 /*=============================================
-	Eliminar Registro
+	Eliminar Registro factura- parte
 	=============================================*/
 	static public function mdlEliminarRegistro($tabla, $valor){
 	
@@ -453,6 +453,81 @@ static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){
 		}
 
 		$stmt->close();
+
+		$stmt = null;	
+
+}
+
+/*=============================================
+	Eliminar Registro parte
+	=============================================*/
+	static public function mdlEliminarRegistroP($tabla, $valor){
+	
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE noParte = :noParte");
+
+		$stmt->bindParam(":noParte", $valor, PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			print_r(Conexion::conectar()->errorInfo());
+
+		}
+
+		//$stmt->close();
+
+		$stmt = null;	
+
+}
+
+/*=============================================
+	Eliminar Registro parte
+	=============================================*/
+	static public function mdlEliminarRegistroV($tabla, $valor){
+	
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idValor = :idValor");
+
+		$stmt->bindParam(":idValor", $valor, PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			print_r(Conexion::conectar()->errorInfo());
+
+		}
+
+		//$stmt->close();
+
+		$stmt = null;	
+
+}
+
+/*=============================================
+	Eliminar Registro factura
+	=============================================*/
+	static public function mdlEliminarRegistroF($tabla, $valor){
+	
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idInvoice = :idInvoice");
+
+		$stmt->bindParam(":idInvoice", $valor, PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			print_r(Conexion::conectar()->errorInfo());
+
+		}
+
+		//$stmt->close();
 
 		$stmt = null;	
 

@@ -68,7 +68,8 @@
   
             <div>
                 <button type="submit"
-                        name="upload">
+                        name="upload"
+                        onclick="location.href='index.php?pagina=parte';">
                   Subir
                 </button>
             </div>
