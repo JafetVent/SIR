@@ -53,7 +53,7 @@ $Parte = ControladorFormularios::ctrSeleccionarRegistrosParte(null,null,null);
                                 </div>
                                 <form method="POST">
                                     <input type="hidden" value="<?php echo $value["idFacPar"]; ?>" name="eliminarRegistro">
-                                    <button type="submit" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button>
+                                    <button type="submit" onclick="return confirm('¿Estas seguro de querer eliminar?');" class="btn btn-danger" ><i class="fas fa-trash-alt"></i></button>
                                     <?php
                                     $eliminar = new ControladorFormularios();
                                     $eliminar -> ctrEliminarRegistro();
