@@ -389,12 +389,13 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosVistaInspeccion($tabla, $item, $valor){	
-			$stmt = Conexion::conectar()->prepare("	SELECT DISTINCT caracteristicas, especificacion, equipo, toleranciamin, toleranciamax, i1, i2, 									    i3, i4, i5 FROM $tabla
-													JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar
-													JOIN parte ON facturas_parte.noParte = parte.noParte
-													JOIN valoresinsp ON parte.noParte = valoresinsp.noParte
-													JOIN inspecciones on reporte.idReporte = inspecciones.idReporte
-													WHERE reporte.$item = :$item");
+			$stmt = Conexion::conectar()->prepare("	SELECT DISTINCT caracteristicas, equipo, especificacion, toleranciamax, toleranciamin, i1, i2, i3, i4, i5 FROM $tabla
+JOIN facturas_parte on reporte.idFacPar = facturas_parte.idFacPar
+JOIN parte on facturas_parte.noParte = facturas_parte.noParte
+JOIN valoresinsp on parte.noParte = valoresinsp.noParte
+JOIN inspecciones on reporte.idReporte = inspecciones.idReporte
+WHERE facturas_parte.$item = :$item
+GROUP BY caracteristicas, equipo, especificacion, toleranciamax, toleranciamin");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 
