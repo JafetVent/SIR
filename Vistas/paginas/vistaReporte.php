@@ -4,7 +4,6 @@ $item = "idFacPar";
 $valor = $_GET["id"];
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParteVista($item, $valor);
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosVistaReporte($item, $valor);
-$caracteristicas = ControladorFormularios::ctrSeleccionarRegistrosVistaReporteCaracteristicas($item, $valor);
 $inspeccion = ControladorFormularios::ctrSeleccionarRegistrosVistaInspeccion($item, $valor);
 
 }
