@@ -359,11 +359,7 @@ class ModeloFormularios{
 	}
 
 	static public function mdlSeleccionarRegistrosVistaReporteCaracteristicas($tabla, $item, $valor){	
-			$stmt = Conexion::conectar()->prepare("	SELECT * FROM $tabla
-													JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar
-													JOIN parte ON facturas_parte.noParte = parte.noParte
-													JOIN valoresinsp ON parte.noParte = valoresinsp.noParte
-													WHERE facturas_parte.$item = :$item ");
+			$stmt = Conexion::conectar()->prepare("	SELECT * FROM $tabla JOIN inspecciones on reporte.idReporte = inspecciones.idReporte WHERE reporte.$item = :$item ");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 
@@ -377,13 +373,14 @@ class ModeloFormularios{
 	static public function mdlSeleccionarRegistrosVistaInspeccion($tabla, $item, $valor){	
 			$stmt = Conexion::conectar()->prepare("	
 
-SELECT DISTINCT caracteristicas, equipo, especificacion, toleranciamax, toleranciamin, i1, i2, i3, i4, i5 FROM $tabla
-JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar
-JOIN parte ON facturas_parte.noParte = parte.noParte
+SELECT DISTINCT caracteristicas, equipo, especificacion, toleranciamax, toleranciamin FROM reporte JOIN facturas_parte ON reporte.idFacPar = facturas_parte.idFacPar 
+JOIN parte ON facturas_parte.noParte = parte.noParte 
 jOIN valoresinsp ON parte.noParte = valoresinsp.noParte
-JOIN inspecciones on reporte.idReporte = inspecciones.idReporte
-WHERE facturas_parte.$item = :$item
-GROUP BY caracteristicas, equipo, especificacion, toleranciamax, toleranciamin
+WHERE facturas_parte.$item = :$item; 
+
+
+SELECT * FROM reporte JOIN inspecciones on reporte.idReporte = inspecciones.idReporte WHERE reporte.$item = :$item;
+
 
 
 
@@ -397,7 +394,6 @@ GROUP BY caracteristicas, equipo, especificacion, toleranciamax, toleranciamin
 			}
 			return $data;
 	}
-
 
 
 static public function mdlSeleccionarRegistrosParteVista($tabla, $item, $valor){

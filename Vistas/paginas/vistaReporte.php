@@ -5,7 +5,7 @@ $valor = $_GET["id"];
 $Parte = ControladorFormularios::ctrSeleccionarRegistrosParteVista($item, $valor);
 $reporte = ControladorFormularios::ctrSeleccionarRegistrosVistaReporte($item, $valor);
 $inspeccion = ControladorFormularios::ctrSeleccionarRegistrosVistaInspeccion($item, $valor);
-
+$inspeccion1 = ControladorFormularios::ctrSeleccionarRegistrosVistaReporteCaracteristicas($item, $valor);
 }
 ?>
 <style type="text/css">
@@ -35,6 +35,13 @@ border-radius: 3%;
 
 	<?php foreach ($reporte as $key => $value): ?>
 	<div class="row">
+		<div class="container col">
+		<h5>idReporte: </h5>
+		<dl>
+    		<dt><?php echo $value["idReporte"];?></dt>
+  		</dl> 
+  		</div>
+
 		<div class="container col">
 		<h5>Fecha: </h5>
 		<dl>
@@ -73,10 +80,14 @@ border-radius: 3%;
 	
 	<?php endforeach?>
 </div>
-<div class="table-responsive">
-	<table class="table table-bordered">
-		<thead class="thead-light">
-			<tr>
+
+
+<div class="row">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
 				<th>
 					Caracteristica
 				</th>
@@ -91,28 +102,13 @@ border-radius: 3%;
 				</th>
 				<th>
 					Tolerancia Max
-				</th>				
-				<th>
-					I1
 				</th>
-				<th>
-					I2
-				</th>
-				<th>
-					I3
-				</th>
-				<th>
-					I4
-				</th>
-				<th>
-					I5
-				</th>
-			</tr>
-			
-		</thead>
-		
-		<tbody id="myTable">
-			<?php foreach ($inspeccion as $key => $value): ?>
+                    </tr>
+                </thead>
+                
+                <tbody>
+        <tr>
+ <?php foreach ($inspeccion as $key => $value): ?>
 			<tr>
 				<td>
 					<?php echo $value["caracteristicas"];?>
@@ -127,8 +123,38 @@ border-radius: 3%;
 					<?php echo $value["toleranciamin"];?>
 				</td>
 				<td>
-					<?php echo $value["toleranciamax"];?>
-					<td>
+					<?php echo $value["toleranciamax"];?>					
+				</td>
+          </tr>
+<?php endforeach?>
+      </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+					I1
+				</th>
+				<th>
+					I2
+				</th>
+				<th>
+					I3
+				</th>
+				<th>
+					I4
+				</th>
+				<th>
+					I5
+				</th>
+                    </tr>
+                </thead>                
+                <tbody>
+<?php foreach ($inspeccion1 as $key => $value): ?>
+        <tr>
+          <td>
 						<?php echo $value["i1"];?>
 					</td>
 					<td>
@@ -143,13 +169,12 @@ border-radius: 3%;
 					<td>
 						<?php echo $value["i5"];?>
 					</td>
-				</tr>
-				
-				<?php endforeach?>
-				
-			</tbody>
-		</table>
-	</div>
+          </tr>
+<?php endforeach?>
+      </tbody>
+            </table>
+        </div>
+    </div>
 			<?php foreach ($reporte as $key => $value): ?>
 				<div class="container py-3">
 

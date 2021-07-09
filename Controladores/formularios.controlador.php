@@ -172,6 +172,15 @@ class ControladorFormularios{
 		
 	}
 
+	static public function ctrSeleccionarRegistrosVistaInspeccionValores($item, $valor){
+
+		$tabla = "inspecciones";
+		$respuesta = ModeloFormularios::mdlSeleccionarRegistrosVistaInspeccion($tabla, $item, $valor);
+
+		return $respuesta;
+		
+	}
+
 
 	/*=============================================
 					REGISTRO DE PARTES
