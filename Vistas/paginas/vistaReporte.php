@@ -35,12 +35,12 @@ border-radius: 3%;
 
 	<?php foreach ($reporte as $key => $value): ?>
 	<div class="row">
-		<div class="container col">
+		<!-- <div class="container col">
 		<h5>idReporte: </h5>
 		<dl>
     		<dt><?php echo $value["idReporte"];?></dt>
   		</dl> 
-  		</div>
+  		</div> -->
 
 		<div class="container col">
 		<h5>Fecha: </h5>
@@ -84,7 +84,8 @@ border-radius: 3%;
 
 <div class="row">
 
-        <div class="table-responsive">
+        <div class="col-sm-8">
+        <font size="2" >
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -129,8 +130,10 @@ border-radius: 3%;
 <?php endforeach?>
       </tbody>
             </table>
+            </font>
         </div>
-        <div class="table-responsive">
+        <div class="col-sm-4">
+        	<font size="2" >
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -173,6 +176,7 @@ border-radius: 3%;
 <?php endforeach?>
       </tbody>
             </table>
+            </font>
         </div>
     </div>
 			<?php foreach ($reporte as $key => $value): ?>
